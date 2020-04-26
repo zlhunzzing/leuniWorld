@@ -16,7 +16,7 @@ function Main() {
       </header>
 
       <div className="Menus">
-        <span className="Menu">무설치게임</span>
+        <Link to="/portablegames">무설치게임</Link>
         <span className="Menu">무지개의 기적(준비중)</span>
       </div>
     </div>
