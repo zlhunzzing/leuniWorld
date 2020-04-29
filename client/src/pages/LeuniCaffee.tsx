@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Main.css";
+// import "./LeuniCaffee.css";
 
-function Main() {
+function LeuniCaffee() {
   return (
     <div className="Main">
       <header>
@@ -15,11 +15,9 @@ function Main() {
         </Link>
       </header>
 
-      <div className="Menus">
-        <Link to="/leunicaffee">르니카페</Link>
-      </div>
+      <div className="Menus">르니카페</div>
     </div>
   );
 }
 
-export default Main;
+export default LeuniCaffee;

@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 /* pages */
 import Main from "./pages/Main";
 import SignUp from "./pages/SignUp";
-import PortableGames from "./pages/PortableGames";
+import LeuniCaffee from "./pages/LeuniCaffee";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <Route exact path="/signup" render={() => <SignUp></SignUp>}></Route>
         <Route
           exact
-          path="/portablegames"
-          render={() => <PortableGames></PortableGames>}
+          path="/leunicaffee"
+          render={() => <LeuniCaffee></LeuniCaffee>}
         ></Route>
         <Route path="/" render={() => <Main></Main>}></Route>
       </Switch>
