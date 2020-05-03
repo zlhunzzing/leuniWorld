@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Component
+import Chat from "../components/Chat";
+
 // import "./LeuniCaffee.css";
 
 function LeuniCaffee() {
@@ -16,6 +19,7 @@ function LeuniCaffee() {
       </header>
 
       <div className="Menus">르니카페</div>
+      <Chat></Chat>
     </div>
   );
 }

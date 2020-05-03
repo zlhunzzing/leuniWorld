@@ -1,22 +1,40 @@
-import * as express from "express";
-import { createConnection, getRepository } from "typeorm";
+import express from "express";
+import { createConnection } from "typeorm";
 import * as bodyParser from "body-parser";
-import * as cors from "cors";
+import cors from "cors";
 import mainRouter from "./routes/main";
 
-const PORT = 4000;
+import http from "http";
+import socketIo from "socket.io";
+
+const PORT = 3000;
 const app = express();
+
+const server = http.createServer(app);
+const io = socketIo(server);
 
 createConnection()
   .then(async () => {
     app.use(bodyParser.json());
     app.use(
       cors({
-        origin: ["http://localhost:3000"],
+        origin: ["http://localhost:4000"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
       })
     );
+
+    io.on("connection", (socket) => {
+      console.log("a user connected");
+
+      socket.on("chat message", (msg) => {
+        io.emit("chat message", msg);
+      });
+
+      socket.on("disconnect", () => {
+        console.log("user disconnected");
+      });
+    });
 
     app.get("/", (req, res) => {
       res.send("hello");
@@ -24,7 +42,7 @@ createConnection()
 
     app.use("/main", mainRouter);
 
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       // console.log(`Server listening on port ${PORT}`)
       console.log(`Server listening on port ${PORT}`);
     });
