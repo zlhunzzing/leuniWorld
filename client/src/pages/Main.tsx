@@ -1,19 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Main.css";
+import "../styles/Main.css";
+
+// Component
+import Header from "../components/Header";
 
 function Main() {
   return (
     <div className="Main">
-      <header>
-        <div className="SignUp">
-          <Link to="/signup">로그인</Link>
-        </div>
-        <Link className="Title" to="main">
-          르니월드
-        </Link>
-      </header>
+      <Header></Header>
 
       <div className="Menus">
         <Link to="/leunicaffee">르니카페</Link>

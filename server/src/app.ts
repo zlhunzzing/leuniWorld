@@ -3,13 +3,12 @@ import { createConnection } from "typeorm";
 import * as bodyParser from "body-parser";
 import cors from "cors";
 import mainRouter from "./routes/main";
-
 import http from "http";
 import socketIo from "socket.io";
+import socketRouter from "./socketRouter";
 
 const PORT = 3000;
 const app = express();
-
 const server = http.createServer(app);
 const io = socketIo(server);
 
@@ -24,23 +23,13 @@ createConnection()
       })
     );
 
-    io.on("connection", (socket) => {
-      console.log("a user connected");
-
-      socket.on("chat message", (msg) => {
-        io.emit("chat message", msg);
-      });
-
-      socket.on("disconnect", () => {
-        console.log("user disconnected");
-      });
-    });
-
     app.get("/", (req, res) => {
       res.send("hello");
     });
 
     app.use("/main", mainRouter);
+
+    io.on("connection", socketRouter(io));
 
     server.listen(PORT, () => {
       // console.log(`Server listening on port ${PORT}`)
