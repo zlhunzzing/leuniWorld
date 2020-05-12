@@ -35,13 +35,13 @@ class SignUp extends React.Component<{}, MyState> {
           onSubmit={(e) => {
             e.preventDefault();
             axios
-              .post("http://localhost:4000/main/signup", {
+              .post("http://localhost:3000/user/signup", {
                 email: email,
                 password: password,
                 username: username,
               })
               .then((res) => {
-                // return <Link to="/main"></Link>; ㅠㅠ
+                // return <Link to="/user"></Link>; ㅠㅠ
               })
               .catch((err) => console.log(err));
           }}

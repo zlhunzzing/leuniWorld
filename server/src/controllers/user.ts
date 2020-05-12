@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { mainService } from "../services/main";
+import { userService } from "../services/user";
 
-const service = new mainService();
+const service = new userService();
 
-export class mainController {
+export class userController {
   async signUpController(req: Request, res: Response): Promise<void> {
     try {
       await service.signupService(req.body);

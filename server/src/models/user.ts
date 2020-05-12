@@ -1,13 +1,18 @@
 import { getRepository } from "typeorm";
 import { user } from "../entity/user";
 
-export class mainModels {
+export class userModels {
   async findOneWithEmail(email: any) {
-    return await getRepository(user).findOne({
+    const result = await getRepository(user).findOne({
       where: {
         email,
       },
     });
+    if (result) {
+      throw new Error("ERROR");
+    } else {
+      return result;
+    }
   }
 
   async save(userData) {

@@ -2,7 +2,7 @@ import express from "express";
 import { createConnection } from "typeorm";
 import * as bodyParser from "body-parser";
 import cors from "cors";
-import mainRouter from "./routes/main";
+import userRouter from "./routes/user";
 import http from "http";
 import socketIo from "socket.io";
 import socketRouter from "./socketRouter";
@@ -13,7 +13,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 createConnection()
-  .then(async () => {
+  .then(() => {
     app.use(bodyParser.json());
     app.use(
       cors({
@@ -27,7 +27,7 @@ createConnection()
       res.send("hello");
     });
 
-    app.use("/main", mainRouter);
+    app.use("/user", userRouter);
 
     io.on("connection", socketRouter(io));
 
