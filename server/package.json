@@ -4,8 +4,8 @@
   "description": "보일러플레이트 서버입니다.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register ./**/*.spec.ts",
-    "dev": "nodemon src/app.ts"
+    "test": "mocha -r ts-node/register ./**/*.test.ts",
+    "dev": "NODE_ENV=development nodemon src/app.ts"
   },
   "keywords": [],
   "author": "",
