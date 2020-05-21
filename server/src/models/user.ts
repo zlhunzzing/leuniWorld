@@ -1,9 +1,9 @@
 import { getRepository } from "typeorm";
-import { user } from "../entity/user";
+import { User } from "../entity/user";
 
 export class userModels {
   async findOneWithEmail(email: any) {
-    const result = await getRepository(user).findOne({
+    const result = await getRepository(User).findOne({
       where: {
         email,
       },
@@ -16,6 +16,6 @@ export class userModels {
   }
 
   async save(userData) {
-    await getRepository(user).save(userData);
+    await getRepository(User).save(userData);
   }
 }

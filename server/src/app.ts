@@ -12,28 +12,28 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-createConnection()
-  .then(() => {
-    app.use(bodyParser.json());
-    app.use(
-      cors({
-        origin: ["http://localhost:4000"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
-      })
-    );
+if (process.env.NODE_ENV === "development") createConnection();
 
-    app.get("/", (req, res) => {
-      res.send("hello");
-    });
-
-    app.use("/user", userRouter);
-
-    io.on("connection", socketRouter(io));
-
-    server.listen(PORT, () => {
-      // console.log(`Server listening on port ${PORT}`)
-      console.log(`Server listening on port ${PORT}`);
-    });
+app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: ["http://localhost:4000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
-  .catch((error) => console.log(error));
+);
+
+app.get("/", (req, res) => {
+  res.send("hello");
+});
+
+app.use("/user", userRouter);
+
+io.on("connection", socketRouter(io));
+
+server.listen(PORT, () => {
+  // console.log(`Server listening on port ${PORT}`)
+  console.log(`Server listening on port ${PORT}`);
+});
+
+export default app;
