@@ -33,6 +33,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "mocha": "^7.1.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.4",
     "typescript": "^3.8.3"

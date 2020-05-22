@@ -2,10 +2,10 @@ import chai from "chai";
 import chaiHttp = require("chai-http");
 const expect = chai.expect;
 chai.use(chaiHttp);
-import app from "../src/app";
+import app from "../app";
 import { createConnection } from "typeorm";
 import { getRepository } from "typeorm";
-import { User } from "../src/entity/user";
+import { User } from "../entity/user";
 
 describe("Implemented testcase", () => {
   createConnection();

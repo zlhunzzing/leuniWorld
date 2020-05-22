@@ -1,5 +1,6 @@
 import { getRepository } from "typeorm";
 import { User } from "../entity/user";
+import { ERROR_MESSAGE } from "../common/ErrorMessages";
 
 export class userModels {
   async findOneWithEmail(email: any) {
@@ -9,7 +10,7 @@ export class userModels {
       },
     });
     if (result) {
-      throw new Error("ERROR");
+      throw new Error(ERROR_MESSAGE.DUPLICATE_EMAIL);
     } else {
       return result;
     }
@@ -27,7 +28,7 @@ export class userModels {
       },
     });
     if (!result) {
-      throw new Error("ERROR");
+      throw new Error(ERROR_MESSAGE.WRONG_ACCOUNT);
     }
   }
 }
