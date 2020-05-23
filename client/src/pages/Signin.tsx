@@ -6,44 +6,49 @@ interface MyState {
   email: any;
   password: any;
   username: any;
+  isLogin: boolean;
 }
 
-class SignUp extends React.Component<{}, MyState> {
+class Signin extends React.Component<{}, MyState> {
   constructor(props: any) {
     super(props);
     this.state = {
       email: "",
       password: "",
       username: "",
+      isLogin: false,
     };
     this.handleInputValue = this.handleInputValue.bind(this);
   }
+
   handleInputValue = (key: any) => (e: any) => {
     const obj: any = { [key]: e.target.value };
     this.setState(obj);
   };
+
   render() {
-    const { email, password, username } = this.state;
+    const { email, password, isLogin } = this.state;
     return (
       <div
         style={{
           alignItems: "center",
         }}
       >
-        <h1>Sign Up</h1>
+        <h1>로그인</h1>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             axios
-              .post("http://localhost:3000/user/signup", {
+              .post("http://localhost:3000/user/signin", {
                 email: email,
                 password: password,
-                username: username,
               })
-              .then((res) => {
-                // return <Link to="/user"></Link>; ㅠㅠ
+              .then(async (res) => {
+                await this.setState({
+                  isLogin: true,
+                });
               })
-              .catch((err) => console.log(err));
+              .catch((err) => console.log(err.response));
           }}
         >
           <div>
@@ -73,19 +78,7 @@ class SignUp extends React.Component<{}, MyState> {
             ></input>
           </div>
           <div>
-            <input
-              style={{
-                width: "195px",
-                height: "30px",
-                margin: "5px",
-                borderRadius: "5px",
-              }}
-              onChange={this.handleInputValue("username")}
-              placeholder="이름"
-            ></input>
-          </div>
-          <div>
-            <Link to="/main">이미 아이디가 있으신가요?</Link>
+            <Link to="/signup">회원가입하기</Link>
           </div>
           <button
             style={{
@@ -97,7 +90,7 @@ class SignUp extends React.Component<{}, MyState> {
             }}
             type="submit"
           >
-            회원가입
+            로그인
           </button>
         </form>
       </div>
@@ -105,4 +98,4 @@ class SignUp extends React.Component<{}, MyState> {
   }
 }
 
-export default SignUp;
+export default Signin;

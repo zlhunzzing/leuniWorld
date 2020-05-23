@@ -16,7 +16,8 @@ export class userController {
   async signinController(req: Request, res: Response): Promise<void> {
     try {
       const result = await service.signinService(req.body);
-      res.status(200).json(result);
+      res.cookie("user", result);
+      res.status(200).json({ token: result });
     } catch (err) {
       res.status(409).send(err.message);
     }

@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom";
 
 /* pages */
 import Main from "./pages/Main";
-import SignUp from "./pages/SignUp";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 import LeuniCaffee from "./pages/LeuniCaffee";
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/main" render={() => <Main></Main>}></Route>
-        <Route exact path="/signup" render={() => <SignUp></SignUp>}></Route>
+        <Route exact path="/signup" render={() => <Signup></Signup>}></Route>
+        <Route exact path="/signin" render={() => <Signin></Signin>}></Route>
         <Route
           exact
           path="/leunicaffee"
