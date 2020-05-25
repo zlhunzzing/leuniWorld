@@ -4,7 +4,7 @@ import React from "react";
 import Header from "../components/Header";
 import Chat from "../components/Chat";
 
-function LeuniCaffee() {
+export default function LeuniCaffee() {
   return (
     <div className="Main">
       <Header></Header>
@@ -14,5 +14,3 @@ function LeuniCaffee() {
     </div>
   );
 }
-
-export default LeuniCaffee;

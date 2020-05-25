@@ -7,7 +7,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import LeuniCaffee from "./pages/LeuniCaffee";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Switch>
@@ -24,5 +24,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

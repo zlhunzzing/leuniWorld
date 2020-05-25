@@ -1,22 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import store from "../store";
 
 interface MyState {
   email: any;
   password: any;
   username: any;
-  isLogin: boolean;
 }
 
-class Signin extends React.Component<{}, MyState> {
+export default class Signin extends React.Component<{}, MyState> {
   constructor(props: any) {
     super(props);
     this.state = {
       email: "",
       password: "",
       username: "",
-      isLogin: false,
     };
     this.handleInputValue = this.handleInputValue.bind(this);
   }
@@ -27,7 +26,7 @@ class Signin extends React.Component<{}, MyState> {
   };
 
   render() {
-    const { email, password, isLogin } = this.state;
+    const { email, password } = this.state;
     return (
       <div
         style={{
@@ -44,9 +43,8 @@ class Signin extends React.Component<{}, MyState> {
                 password: password,
               })
               .then(async (res) => {
-                await this.setState({
-                  isLogin: true,
-                });
+                store.dispatch({ type: "SIGNIN" });
+                console.log("로그인 성공");
               })
               .catch((err) => console.log(err.response));
           }}
@@ -97,5 +95,3 @@ class Signin extends React.Component<{}, MyState> {
     );
   }
 }
-
-export default Signin;

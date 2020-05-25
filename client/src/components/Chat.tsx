@@ -11,7 +11,7 @@ export interface ChatState {
 }
 export interface Data {}
 
-class Chat extends React.Component<ChatProps, ChatState> {
+export default class Chat extends React.Component<ChatProps, ChatState> {
   constructor(props: ChatProps) {
     super(props);
     this.state = {
@@ -67,5 +67,3 @@ class Chat extends React.Component<ChatProps, ChatState> {
     );
   }
 }
-
-export default Chat;

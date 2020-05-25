@@ -6,7 +6,7 @@ import "../styles/Main.css";
 // Component
 import Header from "../components/Header";
 
-function Main() {
+export default function Main() {
   return (
     <div className="Main">
       <Header></Header>
@@ -17,5 +17,3 @@ function Main() {
     </div>
   );
 }
-
-export default Main;

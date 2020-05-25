@@ -8,7 +8,7 @@ interface MyState {
   username: any;
 }
 
-class Signup extends React.Component<{}, MyState> {
+export default class Signup extends React.Component<{}, MyState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -104,5 +104,3 @@ class Signup extends React.Component<{}, MyState> {
     );
   }
 }
-
-export default Signup;
