@@ -42,8 +42,9 @@ export default class Signin extends React.Component<{}, MyState> {
                 email: email,
                 password: password,
               })
-              .then(async (res) => {
+              .then(async (res: any) => {
                 store.dispatch({ type: "SIGNIN" });
+                document.cookie = `user = ${res.data.token}`;
                 console.log("로그인 성공");
               })
               .catch((err) => console.log(err.response));

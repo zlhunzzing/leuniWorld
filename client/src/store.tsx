@@ -7,6 +7,9 @@ export default createStore(function (state: any, action: any) {
   if (action.type === "SIGNIN") {
     return { ...state, isSignin: true };
   }
+  if (action.type === "SIGNOUT") {
+    return { ...state, isSignin: false };
+  }
   return state;
 }, (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__());
