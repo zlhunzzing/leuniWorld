@@ -14,8 +14,7 @@ export default function Header() {
 
   return (
     <header>
-      <div className="SignUp">
-        {/* {this.state.isSignin ? <Signout /> : <Link to="/signin">로그인</Link>} */}
+      <div className="SignupBar">
         {isSIgnin ? <Signout /> : <Link to="/signin">로그인</Link>}
       </div>
       <Link className="Title" to="main">

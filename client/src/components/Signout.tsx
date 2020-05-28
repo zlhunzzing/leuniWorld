@@ -4,7 +4,6 @@ import store from "../store";
 export default function Signout() {
   return (
     <div
-      className="Signout"
       onClick={() => {
         if (window.confirm("로그아웃을 하시겠습니까?")) {
           store.dispatch({ type: "SIGNIN" });

@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "../styles/Main.css";
-
 // Component
 import Header from "../components/Header";
 
+// CSS
+import "../pagesStyles/Main.css";
+
 export default function Main() {
   return (
-    <div className="Main">
+    <div className="MainPage">
       <Header></Header>
 
       <div className="Menus">

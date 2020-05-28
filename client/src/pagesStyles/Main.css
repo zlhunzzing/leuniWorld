@@ -1,22 +1,19 @@
-.Main {
+.MainPage {
   text-align: center;
   width: 1024px;
   /* border: 1px solid black; */
-}
-
-.SignUp {
-  text-align: right;
-}
-
-.Title {
-  color: black;
-  font-size: 30px;
 }
 
 .Menus {
   margin: 20px;
 }
 
-.Menu {
-  padding: 5px;
+/* Header */
+.SignupBar {
+  text-align: right;
+}
+
+.Title {
+  color: black;
+  font-size: 30px;
 }

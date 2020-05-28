@@ -1,43 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-
-import "../styles/Chat.css";
 
 const socketServer = io("http://localhost:3000");
 
-export interface ChatProps {}
-export interface ChatState {
-  content: string;
-}
-export interface Data {}
+export default function Chat() {
+  const [content, SetContent] = useState("");
 
-export default class Chat extends React.Component<ChatProps, ChatState> {
-  constructor(props: ChatProps) {
-    super(props);
-    this.state = {
-      content: "",
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     socketServer.on("connect", () => {
       console.log("connection server");
     });
 
     socketServer.on("sendMessage", (data: string) => {
-      this.messageTemplate(data);
+      messageTemplate(data);
     });
-  }
+  }, []);
 
-  onChangeMessage(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ content: e.target.value });
-  }
-
-  sendMessage(content: string) {
-    socketServer.emit("sendMessage", content);
-  }
-
-  messageTemplate(content: string) {
+  function messageTemplate(content: string) {
     const message = document.createElement("div");
     message.innerHTML = content;
 
@@ -45,25 +24,21 @@ export default class Chat extends React.Component<ChatProps, ChatState> {
     chatBox?.appendChild(message);
   }
 
-  render() {
-    return (
-      <div className="Chat">
-        <div className="chatBox"></div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            this.sendMessage(this.state.content);
-          }}
-        >
-          <input
-            type="text"
-            onChange={(e) => {
-              this.onChangeMessage(e);
-            }}
-          ></input>
-          <input type="submit" value="전송" />
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <div className="chatBox"></div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          socketServer.emit("sendMessage", content);
+        }}
+      >
+        <input
+          type="text"
+          onChange={({ target: { value } }) => SetContent(value)}
+        ></input>
+        <input type="submit" value="전송" />
+      </form>
+    </div>
+  );
 }
