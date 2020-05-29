@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
+import ChatboxPresenter from "../presenters/ChatboxPresenter";
 
 const socketServer = io("http://localhost:3000");
 
-export default function Chat() {
-  const [content, SetContent] = useState("");
+export default function ChatboxContainer() {
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     socketServer.on("connect", () => {
@@ -24,21 +25,9 @@ export default function Chat() {
     chatBox?.appendChild(message);
   }
 
-  return (
-    <div>
-      <div className="chatBox"></div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          socketServer.emit("sendMessage", content);
-        }}
-      >
-        <input
-          type="text"
-          onChange={({ target: { value } }) => SetContent(value)}
-        ></input>
-        <input type="submit" value="전송" />
-      </form>
-    </div>
-  );
+  function sendMessage() {
+    socketServer.emit("sendMessage", content);
+  }
+
+  return <ChatboxPresenter sendMessage={sendMessage} setContent={setContent} />;
 }
