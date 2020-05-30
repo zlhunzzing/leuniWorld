@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import store from "../store";
+import * as services from "../services/Authentication";
 
 interface Props {
   email: any;
@@ -26,17 +25,7 @@ const SigninPresenter: React.FunctionComponent<Props> = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          axios
-            .post("http://localhost:3000/user/signin", {
-              email: email,
-              password: password,
-            })
-            .then(async (res: any) => {
-              store.dispatch({ type: "SIGNIN" });
-              document.cookie = `user = ${res.data.token}`;
-              console.log("로그인 성공");
-            })
-            .catch((err) => console.log(err.response));
+          services.signin(email, password);
         }}
       >
         <div>

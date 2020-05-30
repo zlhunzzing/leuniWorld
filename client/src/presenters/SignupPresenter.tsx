@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import * as services from "../services/Authentication";
 
 interface Props {
   email: string;
@@ -29,16 +29,7 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          axios
-            .post("http://localhost:3000/user/signup", {
-              email: email,
-              password: password,
-              username: username,
-            })
-            .then((res) => {
-              // return <Link to="/user"></Link>; ㅠㅠ
-            })
-            .catch((err) => console.log(err.response));
+          services.signup(email, password, username);
         }}
       >
         <div>
