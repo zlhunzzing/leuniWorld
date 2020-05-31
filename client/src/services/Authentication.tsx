@@ -15,7 +15,12 @@ export function signin(email: string, password: string) {
     .catch((err) => console.log(err.response));
 }
 
-export function signup(email: string, password: string, username: string) {
+export function signup(
+  email: string,
+  password: string,
+  username: string,
+  history: any
+) {
   return axios
     .post("http://localhost:3000/user/signup", {
       email: email,
@@ -23,7 +28,9 @@ export function signup(email: string, password: string, username: string) {
       username: username,
     })
     .then((res) => {
-      // return <Link to="/user"></Link>; ㅠㅠ
+      console.log(res.status);
+      console.log("his", history);
+      history.push("/signin");
     })
     .catch((err) => console.log(err.response));
 }

@@ -12,10 +12,9 @@ export default function App() {
     <div className="App">
       <Switch>
         <Route path="/main" render={() => <Main></Main>}></Route>
-        <Route exact path="/signup" render={() => <Signup></Signup>}></Route>
-        <Route exact path="/signin" render={() => <Signin></Signin>}></Route>
+        <Route path="/signup" render={() => <Signup></Signup>}></Route>
+        <Route path="/signin" render={() => <Signin></Signin>}></Route>
         <Route
-          exact
           path="/leunicaffee"
           render={() => <LeuniCaffee></LeuniCaffee>}
         ></Route>

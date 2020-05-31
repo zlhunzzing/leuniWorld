@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import * as services from "../services/Authentication";
 
 interface Props {
-  email: any;
+  email: string;
   setEmail: any;
-  password: any;
+  password: string;
   setPassword: any;
 }
 

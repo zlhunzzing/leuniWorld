@@ -9,6 +9,7 @@ interface Props {
   setPassword: any;
   username: string;
   setUsername: any;
+  history: any;
 }
 
 const SignupPresenter: React.FunctionComponent<Props> = ({
@@ -18,6 +19,7 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
   setPassword,
   username,
   setUsername,
+  history,
 }: Props) => {
   return (
     <div
@@ -29,7 +31,7 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          services.signup(email, password, username);
+          services.signup(email, password, username, history);
         }}
       >
         <div>
