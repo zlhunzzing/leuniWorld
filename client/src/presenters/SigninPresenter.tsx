@@ -7,6 +7,7 @@ interface Props {
   setEmail: any;
   password: string;
   setPassword: any;
+  history: any;
 }
 
 const SigninPresenter: React.FunctionComponent<Props> = ({
@@ -14,6 +15,7 @@ const SigninPresenter: React.FunctionComponent<Props> = ({
   setEmail,
   password,
   setPassword,
+  history,
 }: Props) => {
   return (
     <div
@@ -25,7 +27,7 @@ const SigninPresenter: React.FunctionComponent<Props> = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          services.signin(email, password);
+          services.signin(email, password, history);
         }}
       >
         <div>

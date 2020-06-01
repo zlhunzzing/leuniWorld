@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "../store";
 
-export function signin(email: string, password: string) {
+export function signin(email: string, password: string, history: any) {
   return axios
     .post("http://localhost:3000/user/signin", {
       email: email,
@@ -10,7 +10,7 @@ export function signin(email: string, password: string) {
     .then(async (res: any) => {
       store.dispatch({ type: "SIGNIN" });
       document.cookie = `user = ${res.data.token}`;
-      console.log("로그인 성공");
+      history.push("/");
     })
     .catch((err) => console.log(err.response));
 }
