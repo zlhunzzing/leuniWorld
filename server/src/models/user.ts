@@ -2,7 +2,7 @@ import { getRepository } from "typeorm";
 import { User } from "../entity/user";
 import { ERROR_MESSAGE } from "../common/ErrorMessages";
 
-export class userModels {
+export class UserModels {
   async findOneWithEmail(email: any) {
     const result = await getRepository(User).findOne({
       where: {
@@ -16,8 +16,8 @@ export class userModels {
     }
   }
 
-  async save(userData) {
-    await getRepository(User).save(userData);
+  async save(insertData) {
+    await getRepository(User).save(insertData);
   }
 
   async findOneAccount(email, password) {
@@ -29,6 +29,8 @@ export class userModels {
     });
     if (!result) {
       throw new Error(ERROR_MESSAGE.WRONG_ACCOUNT);
+    } else {
+      return result;
     }
   }
 }

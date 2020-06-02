@@ -1,9 +1,10 @@
-import { userModels } from "../models/user";
+import { UserModels, GuestbookModels } from "../models";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
-const model = new userModels();
+const userModels = new UserModels();
+const guestbookModels = new GuestbookModels();
 
 interface signupData {
   email;
@@ -22,8 +23,8 @@ export class userService {
     userInfo.password = shasum.digest("hex");
 
     try {
-      await model.findOneWithEmail(userInfo.email);
-      await model.save(userInfo);
+      await userModels.findOneWithEmail(userInfo.email);
+      await userModels.save(userInfo);
     } catch (err) {
       throw new Error(err);
     }
@@ -35,10 +36,16 @@ export class userService {
     userInfo.password = shasum.digest("hex");
 
     try {
-      await model.findOneAccount(userInfo.email, userInfo.password);
+      const result = await userModels.findOneAccount(
+        userInfo.email,
+        userInfo.password
+      );
+
       const token = jwt.sign(
         {
-          email: userInfo.email,
+          id: result.id,
+          email: result.email,
+          username: result.username,
         },
         process.env.JWT_SECRET_KEY,
         {
@@ -49,5 +56,19 @@ export class userService {
     } catch (err) {
       throw new Error(err);
     }
+  }
+
+  async addCommentService(commentData, tokenData): Promise<object> {
+    const insertData = {
+      ...commentData,
+      userId: tokenData.id,
+      username: tokenData.username,
+    };
+
+    await guestbookModels.save(insertData);
+
+    const comments = await guestbookModels.findAll();
+
+    return { comments };
   }
 }

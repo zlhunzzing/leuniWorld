@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { userService } from "../services/user";
+import { TokenReq } from "../common/interfaces";
 
 const service = new userService();
 
@@ -18,6 +19,15 @@ export class userController {
       const result = await service.signinService(req.body);
       res.cookie("user", result);
       res.status(200).json({ token: result });
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
+
+  async addCommentController(req: TokenReq, res: Response): Promise<void> {
+    try {
+      const result = await service.addCommentService(req.body, req.tokenData);
+      res.status(201).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }

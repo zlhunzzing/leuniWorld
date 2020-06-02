@@ -3,26 +3,22 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn,
 } from "typeorm";
 
 @Entity()
-export class User {
+export class Guestbook {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  email: string;
-
-  @Column()
-  password: string;
+  content: string;
 
   @Column()
   username: string;
 
+  @Column()
+  userId: string;
+
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }
