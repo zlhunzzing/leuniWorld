@@ -6,7 +6,7 @@ export default function HeaderContainer() {
   const [isSignin, setIsSignin] = useState(store.getState().isSignin);
 
   store.subscribe(() => {
-    setIsSignin(!isSignin);
+    setIsSignin(store.getState().isSignin);
   });
 
   return <HeaderPresenter isSignin={isSignin} />;

@@ -1,4 +1,5 @@
 import React from "react";
+import "../presenterStyles/ChatboxPresenter.css";
 
 interface Props {
   sendMessage: any;
@@ -10,7 +11,7 @@ const ChatboxPresenter: React.FunctionComponent<Props> = ({
   setContent,
 }: Props) => {
   return (
-    <div>
+    <div className="ChatboxPresenter">
       <div className="chatBox"></div>
       <form
         onSubmit={(e) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as services from "../services/Authentication";
+import * as services from "../services/User";
 
 interface Props {
   email: string;

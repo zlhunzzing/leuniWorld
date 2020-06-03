@@ -6,7 +6,7 @@ export default function SignoutContainer() {
     <div
       onClick={() => {
         if (window.confirm("로그아웃을 하시겠습니까?")) {
-          store.dispatch({ type: "SIGNIN" });
+          store.dispatch({ type: "SIGNOUT" });
           document.cookie = "user =;";
         }
       }}

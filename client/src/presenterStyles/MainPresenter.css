@@ -4,6 +4,10 @@
   /* border: 1px solid black; */
 }
 
-.Menus {
+.HeaderFavoriteMenus {
   margin: 20px;
+}
+
+.HeaderFavoriteMenu {
+  margin: 5px;
 }

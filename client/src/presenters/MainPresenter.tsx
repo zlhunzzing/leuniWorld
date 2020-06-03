@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import HeaderContainer from "../containers/HeaderContainer";
-
-// CSS
 import "../presenterStyles/MainPresenter.css";
 
 export default function MainPresenter() {
@@ -10,8 +8,13 @@ export default function MainPresenter() {
     <div className="Main">
       <HeaderContainer></HeaderContainer>
 
-      <div className="Menus">
-        <Link to="/leunicaffee">르니카페</Link>
+      <div className="HeaderFavoriteMenus">
+        <Link className="HeaderFavoriteMenu" to="/leunicaffee">
+          르니카페
+        </Link>
+        <Link className="HeaderFavoriteMenu" to="/guestbook">
+          방명록
+        </Link>
       </div>
     </div>
   );
