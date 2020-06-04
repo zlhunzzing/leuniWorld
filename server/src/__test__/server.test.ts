@@ -22,11 +22,7 @@ describe("Implemented testcase", () => {
   });
 
   describe("POST /user/signup", () => {
-    afterEach(async () => {
-      await getRepository(User).query(`TRUNCATE TABLE user;`);
-    });
-
-    it("it should response 201 status code with user info to signup data", (done) => {
+    it("it should response 201 status code with user signup", (done) => {
       const agent = chai.request.agent(app);
       agent
         .post("/user/signup")
@@ -38,6 +34,27 @@ describe("Implemented testcase", () => {
         .end((err, res) => {
           if (err) done(err);
           expect(res).to.have.status(201);
+          done();
+        });
+    });
+  });
+
+  describe("POST /user/signin", () => {
+    afterEach(async () => {
+      await getRepository(User).query(`TRUNCATE TABLE user;`);
+    });
+
+    it("it should response 200 status code with signin", (done) => {
+      const agent = chai.request.agent(app);
+      agent
+        .post("/user/signin")
+        .send({
+          email: "user2@dogmate.com",
+          password: "1234",
+        })
+        .end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
           done();
         });
     });

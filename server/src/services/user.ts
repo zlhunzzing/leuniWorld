@@ -58,17 +58,19 @@ export class userService {
     }
   }
 
+  async getCommentService(): Promise<object> {
+    const comments = await guestbookModels.findAll();
+    return comments;
+  }
+
   async addCommentService(commentData, tokenData): Promise<object> {
     const insertData = {
       ...commentData,
       userId: tokenData.id,
       username: tokenData.username,
     };
-
     await guestbookModels.save(insertData);
 
-    const comments = await guestbookModels.findAll();
-
-    return { comments };
+    return await this.getCommentService();
   }
 }

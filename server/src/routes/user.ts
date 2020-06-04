@@ -24,4 +24,6 @@ router.post("/signin", controller.signinController);
 
 router.post("/comment", jwtCheck, controller.addCommentController);
 
+router.get("/comment", controller.getCommentController);
+
 export default router;
