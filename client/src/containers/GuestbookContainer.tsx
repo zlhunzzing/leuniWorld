@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import GuestbookPresenter from "../presenters/GuestbookPresenter";
 import HeaderContainer from "../containers/HeaderContainer";
 import store from "../store";
@@ -13,10 +13,22 @@ export default function GuestbookContainer() {
   const token = useState(
     isSignin ? JSON.parse(JSON.stringify(rawToken))[2] : null
   )[0];
+  const [messageData, setMessageData] = useState([]);
 
   store.subscribe(() => {
     setIsSignin(store.getState().isSignin);
   });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/user/comment")
+      .then((res) => {
+        setMessageData(res.data.comments);
+      })
+      .catch((err) => {
+        console.log(err.messages);
+      });
+  }, []);
 
   return (
     <div className="Main">
@@ -25,8 +37,15 @@ export default function GuestbookContainer() {
       <div className="HeaderFavoriteMenus">방명록</div>
 
       <div className="chatBox">
-        <div>메세지 1</div>
-        <div>메세지 2</div>
+        {messageData.length === 0 ? (
+          <div>서버와 연결이 불안정합니다.</div>
+        ) : (
+          messageData.map((x: any, y) => (
+            <div key={y}>
+              이름: {x.username} 내용: {x.content}
+            </div>
+          ))
+        )}
       </div>
       <form
         onSubmit={(e) => {
@@ -40,7 +59,7 @@ export default function GuestbookContainer() {
               { headers: { Authorization: token } }
             )
             .then((res) => {
-              console.log(res);
+              setMessageData(res.data.comments);
             })
             .catch((err) => console.log(err.response));
         }}
