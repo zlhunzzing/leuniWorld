@@ -12,7 +12,7 @@ const ChatboxPresenter: React.FunctionComponent<Props> = ({
 }: Props) => {
   return (
     <div className="ChatboxPresenter">
-      <div className="chatBox"></div>
+      <div className="chatbox"></div>
       <form
         onSubmit={(e) => {
           e.preventDefault();

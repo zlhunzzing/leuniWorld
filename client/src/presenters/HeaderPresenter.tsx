@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignoutContainer from "../containers/SignoutContainer";
-
-// CSS
 import "../presenterStyles/HeaderPresenter.css";
 
 interface Props {

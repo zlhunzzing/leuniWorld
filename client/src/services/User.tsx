@@ -34,3 +34,29 @@ export function signup(
     })
     .catch((err) => console.log(err.response));
 }
+
+export function getCommnet(setMessageData: any) {
+  return axios
+    .get("http://localhost:3000/user/comment")
+    .then((res) => {
+      setMessageData(res.data.comments);
+    })
+    .catch((err) => {
+      console.log(err.messages);
+    });
+}
+
+export function addCommnet(content: string, token: any, setMessageData: any) {
+  return axios
+    .post(
+      "http://localhost:3000/user/comment",
+      {
+        content: content,
+      },
+      { headers: { Authorization: token } }
+    )
+    .then((res) => {
+      setMessageData(res.data.comments);
+    })
+    .catch((err) => console.log(err.response));
+}
