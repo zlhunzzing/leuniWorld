@@ -2,7 +2,6 @@ import React from "react";
 import HeaderContainer from "../containers/HeaderContainer";
 import "../presenterStyles/GuestbookPresenter.css";
 import * as services from "../services/User";
-import moment from "moment";
 
 interface Props {
   isSignin: boolean;
@@ -11,6 +10,7 @@ interface Props {
   token: any;
   messageData: any;
   setMessageData: any;
+  momenter: any;
 }
 
 const GuestbookPresenter: React.FunctionComponent<Props> = ({
@@ -20,6 +20,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
   token,
   messageData,
   setMessageData,
+  momenter,
 }: Props) => {
   return (
     <div className="Main">
@@ -35,12 +36,12 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             .sort((a: any, b: any) => {
               return b.id - a.id;
             })
-            .map((data: any, id: any) => (
+            .map((data: any, id: number) => (
               <div
                 key={id}
                 style={{
                   textAlign: "center",
-                  border: "1px solid black",
+                  borderBottom: "1px solid black",
                   height: "100px",
                   overflow: "hidden",
                 }}
@@ -50,12 +51,14 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
                     fontWeight: "bold",
                   }}
                 >
-                  {data.username}{" "}
-                  {moment(new Date(data.createdAt)).format(
-                    "YYYY년 MM월 DD일 HH시 mm분"
-                  )}
+                  {data.username} {momenter(data.createdAt)}
                 </div>
-                <div>{data.content}</div>
+                {data.content.split("<br>").map((line: string, id: number) => (
+                  <span key={id}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
               </div>
             ))
         )}
@@ -69,10 +72,16 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
       >
         {isSignin ? (
           <div>
-            <input
-              type="text"
+            <textarea
+              maxLength={140}
+              style={{
+                width: "596px",
+                height: "60px",
+                resize: "none",
+              }}
               onChange={({ target: { value } }) => setContent(value)}
-            ></input>
+            ></textarea>
+            <br />
             <input type="submit" value="전송" />
           </div>
         ) : (

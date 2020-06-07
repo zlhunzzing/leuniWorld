@@ -19,10 +19,16 @@ const ChatboxPresenter: React.FunctionComponent<Props> = ({
           sendMessage();
         }}
       >
-        <input
-          type="text"
+        <textarea
+          maxLength={140}
+          style={{
+            width: "596px",
+            height: "60px",
+            resize: "none",
+          }}
           onChange={({ target: { value } }) => setContent(value)}
-        ></input>
+        ></textarea>
+        <br />
         <input type="submit" value="전송" />
       </form>
     </div>

@@ -21,12 +21,12 @@ export default function ChatboxContainer() {
     const message = document.createElement("div");
     message.innerHTML = content;
 
-    const chatBox = document.querySelector(".chatBox");
+    const chatBox = document.querySelector(".chatbox");
     chatBox?.appendChild(message);
   }
 
   function sendMessage() {
-    socketServer.emit("sendMessage", content);
+    socketServer.emit("sendMessage", content.replace(/\n/g, "<br>"));
   }
 
   return <ChatboxPresenter sendMessage={sendMessage} setContent={setContent} />;

@@ -51,7 +51,7 @@ export function addCommnet(content: string, token: any, setMessageData: any) {
     .post(
       "http://localhost:3000/user/comment",
       {
-        content: content,
+        content: content.replace(/\n/g, "<br>"),
       },
       { headers: { Authorization: token } }
     )
