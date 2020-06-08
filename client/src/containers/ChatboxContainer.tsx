@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import ChatboxPresenter from "../presenters/ChatboxPresenter";
+import store from "../store";
 
 const socketServer = io("http://localhost:3000");
 
 export default function ChatboxContainer() {
   const [content, setContent] = useState("");
+  const mounting = useState(store.getState().isChatmount)[0];
 
   useEffect(() => {
     socketServer.on("connect", () => {
       console.log("connection server");
     });
 
-    socketServer.on("sendMessage", (data: string) => {
-      messageTemplate(data);
-    });
-  }, []);
+    if (mounting) {
+      socketServer.on("sendMessage", (data: string) => {
+        messageTemplate(data);
+      });
+      store.dispatch({ type: "DONTMOUNT" });
+    }
+  }, [mounting]);
 
   function messageTemplate(content: string) {
     const message = document.createElement("div");
