@@ -14,13 +14,31 @@ export default function GuestbookContainer() {
     isSignin ? JSON.parse(JSON.stringify(rawToken))[2] : null
   )[0];
   const [messageData, setMessageData] = useState([]);
+  const pageSize = useState(10)[0];
+  const [curPage, setCurPage] = useState(1);
+
+  function pager(data: any) {
+    let pagingData = [];
+    let onePageData = [];
+    for (let i = data.length - 1; i > 0; i--) {
+      onePageData.push(data[i]);
+      if (onePageData.length === pageSize) {
+        pagingData.push(onePageData);
+        onePageData = [];
+      }
+    }
+    if (onePageData.length !== 0) {
+      pagingData.push(onePageData);
+    }
+    return pagingData;
+  }
 
   store.subscribe(() => {
     setIsSignin(store.getState().isSignin);
   });
 
   useEffect(() => {
-    services.getCommnet(setMessageData);
+    services.getCommnet(setMessageData, pager);
   }, []);
 
   function momenter(time: any) {
@@ -36,6 +54,9 @@ export default function GuestbookContainer() {
       messageData={messageData}
       setMessageData={setMessageData}
       momenter={momenter}
+      curPage={curPage}
+      pager={pager}
+      setCurPage={setCurPage}
     />
   );
 }

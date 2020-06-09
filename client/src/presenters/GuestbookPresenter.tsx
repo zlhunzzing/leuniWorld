@@ -11,6 +11,9 @@ interface Props {
   messageData: any;
   setMessageData: any;
   momenter: any;
+  curPage: number;
+  setCurPage: any;
+  pager: any;
 }
 
 const GuestbookPresenter: React.FunctionComponent<Props> = ({
@@ -21,6 +24,9 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
   messageData,
   setMessageData,
   momenter,
+  curPage,
+  setCurPage,
+  pager,
 }: Props) => {
   return (
     <div className="Main">
@@ -32,7 +38,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
         {messageData.length === 0 ? (
           <div>서버와 연결이 불안정합니다.</div>
         ) : (
-          messageData
+          messageData[curPage - 1]
             .sort((a: any, b: any) => {
               return b.id - a.id;
             })
@@ -64,10 +70,26 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
         )}
       </div>
 
+      {messageData.length === 0 ? (
+        <div>서버와 연결이 불안정합니다.</div>
+      ) : (
+        messageData.map((page: any, id: number) => (
+          <span
+            key={id}
+            onClick={() => {
+              setCurPage(id + 1);
+            }}
+          >
+            {" "}
+            {id + 1}
+          </span>
+        ))
+      )}
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          services.addCommnet(content, token, setMessageData);
+          services.addCommnet(content, token, setMessageData, pager);
         }}
       >
         {isSignin ? (

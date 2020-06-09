@@ -35,18 +35,23 @@ export function signup(
     .catch((err) => console.log(err.response));
 }
 
-export function getCommnet(setMessageData: any) {
+export function getCommnet(setMessageData: any, pager: any) {
   return axios
     .get("http://localhost:3000/user/comment")
     .then((res) => {
-      setMessageData(res.data.comments);
+      setMessageData(pager(res.data.comments));
     })
     .catch((err) => {
       console.log(err.messages);
     });
 }
 
-export function addCommnet(content: string, token: any, setMessageData: any) {
+export function addCommnet(
+  content: string,
+  token: any,
+  setMessageData: any,
+  pager: any
+) {
   return axios
     .post(
       "http://localhost:3000/user/comment",
@@ -56,7 +61,7 @@ export function addCommnet(content: string, token: any, setMessageData: any) {
       { headers: { Authorization: token } }
     )
     .then((res) => {
-      setMessageData(res.data.comments);
+      setMessageData(pager(res.data.comments));
     })
     .catch((err) => console.log(err.response));
 }
