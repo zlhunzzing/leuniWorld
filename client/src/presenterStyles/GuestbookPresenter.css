@@ -5,3 +5,22 @@
   margin: 0 auto;
   overflow: hidden;
 }
+
+.usePage {
+  color: red;
+}
+
+ul li {
+  list-style: none;
+  display: inline;
+  padding: 4px;
+}
+
+ul li a {
+  color: #000;
+  text-decoration: none;
+}
+
+ul li a:focus {
+  font-weight: bold;
+}

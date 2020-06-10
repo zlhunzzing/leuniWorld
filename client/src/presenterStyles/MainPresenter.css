@@ -1,6 +1,7 @@
 .Main {
-  text-align: center;
   width: 1024px;
+  text-align: center;
+  margin: 0 auto;
   /* border: 1px solid black; */
 }
 

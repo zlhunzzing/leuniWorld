@@ -70,21 +70,22 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
         )}
       </div>
 
-      {messageData.length === 0 ? (
-        <div>서버와 연결이 불안정합니다.</div>
-      ) : (
-        messageData.map((page: any, id: number) => (
-          <span
-            key={id}
-            onClick={() => {
-              setCurPage(id + 1);
-            }}
-          >
-            {" "}
-            {id + 1}
-          </span>
-        ))
-      )}
+      <ul>
+        {messageData.length === 0 ? (
+          <div>서버와 연결이 불안정합니다.</div>
+        ) : (
+          messageData.map((page: any, id: number) => (
+            <li
+              key={id}
+              onClick={(x: any) => {
+                setCurPage(id + 1);
+              }}
+            >
+              <a href={`#${id + 1}`}>{id + 1}</a>
+            </li>
+          ))
+        )}
+      </ul>
 
       <form
         onSubmit={(e) => {
