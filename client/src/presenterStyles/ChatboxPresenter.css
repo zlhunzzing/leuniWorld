@@ -5,6 +5,9 @@
 .chatbox {
   border: 1px solid black;
   width: 600px;
-  height: 450px;
+  height: 510px;
   margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
 }

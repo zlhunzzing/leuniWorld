@@ -25,9 +25,11 @@ export default function ChatboxContainer() {
   function messageTemplate(content: string) {
     const message = document.createElement("div");
     message.innerHTML = content;
+    message.style.textAlign = "left";
+    message.style.paddingLeft = "10px";
 
     const chatBox = document.querySelector(".chatbox");
-    chatBox?.appendChild(message);
+    chatBox?.prepend(message);
   }
 
   function sendMessage() {

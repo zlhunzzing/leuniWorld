@@ -46,7 +46,6 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
               <div
                 key={id}
                 style={{
-                  textAlign: "center",
                   borderBottom: "1px solid black",
                   height: "100px",
                   overflow: "hidden",
@@ -60,10 +59,17 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
                   {data.username} {momenter(data.createdAt)}
                 </div>
                 {data.content.split("<br>").map((line: string, id: number) => (
-                  <span key={id}>
+                  <div
+                    key={id}
+                    style={{
+                      textAlign: "left",
+                      paddingLeft: "90px",
+                      paddingRight: "90px",
+                    }}
+                  >
                     {line}
                     <br />
-                  </span>
+                  </div>
                 ))}
               </div>
             ))
