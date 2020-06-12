@@ -5,17 +5,23 @@ import * as services from "../services/User";
 import moment from "moment";
 
 export default function GuestbookContainer() {
-  const [isSignin, setIsSignin] = useState(store.getState().isSignin);
+  const [isSignUserId, setIsSignUserId] = useState(
+    store.getState().isSignUserId
+  );
   const [content, setContent] = useState("");
   const rawToken = useState(
     document.cookie.match("(^|;) ?user=([^;]*)(;|$)")
   )[0];
   const token = useState(
-    isSignin ? JSON.parse(JSON.stringify(rawToken))[2] : null
+    isSignUserId ? JSON.parse(JSON.stringify(rawToken))[2] : null
   )[0];
   const [messageData, setMessageData] = useState([]);
   const pageSize = useState(10)[0];
   const [curPage, setCurPage] = useState(1);
+
+  store.subscribe(() => {
+    setIsSignUserId(store.getState().isSignUserId);
+  });
 
   function pager(data: any) {
     let pagingData = [];
@@ -33,10 +39,6 @@ export default function GuestbookContainer() {
     return pagingData;
   }
 
-  store.subscribe(() => {
-    setIsSignin(store.getState().isSignin);
-  });
-
   useEffect(() => {
     services.getCommnet(setMessageData, pager);
   }, []);
@@ -47,7 +49,7 @@ export default function GuestbookContainer() {
 
   return (
     <GuestbookPresenter
-      isSignin={isSignin}
+      isSignUserId={isSignUserId}
       content={content}
       setContent={setContent}
       token={token}

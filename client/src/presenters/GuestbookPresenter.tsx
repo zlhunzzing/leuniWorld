@@ -4,7 +4,7 @@ import "../presenterStyles/GuestbookPresenter.css";
 import * as services from "../services/User";
 
 interface Props {
-  isSignin: boolean;
+  isSignUserId: any;
   content: string;
   setContent: any;
   token: any;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const GuestbookPresenter: React.FunctionComponent<Props> = ({
-  isSignin,
+  isSignUserId,
   content,
   setContent,
   token,
@@ -56,7 +56,16 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
                     fontWeight: "bold",
                   }}
                 >
-                  {data.username} {momenter(data.createdAt)}
+                  {data.username} {momenter(data.createdAt)}{" "}
+                  {Number(data.userId) === isSignUserId ? (
+                    <span
+                      onClick={() => {
+                        services.deleteComment(data.id, setMessageData, pager);
+                      }}
+                    >
+                      [삭제]
+                    </span>
+                  ) : null}
                 </div>
                 {data.content.split("<br>").map((line: string, id: number) => (
                   <div
@@ -99,7 +108,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
           services.addCommnet(content, token, setMessageData, pager);
         }}
       >
-        {isSignin ? (
+        {isSignUserId ? (
           <div>
             <textarea
               maxLength={140}

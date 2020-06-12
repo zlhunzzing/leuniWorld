@@ -10,8 +10,12 @@
   color: red;
 }
 
+ul {
+  margin-left: -35px;
+}
+
 ul li {
-  list-style: none;
+  /* list-style: none; */
   display: inline;
   padding: 4px;
 }

@@ -18,7 +18,7 @@ export class userController {
     try {
       const result = await service.signinService(req.body);
       res.cookie("user", result);
-      res.status(200).json({ token: result });
+      res.status(200).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }
@@ -27,7 +27,7 @@ export class userController {
   async addCommentController(req: TokenReq, res: Response): Promise<void> {
     try {
       const result = await service.addCommentService(req.body, req.tokenData);
-      res.status(201).json({ comments: result });
+      res.status(201).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }
@@ -36,7 +36,7 @@ export class userController {
   async getCommentController(req: Request, res: Response): Promise<void> {
     try {
       const result = await service.getCommentService();
-      res.status(200).json({ comments: result });
+      res.status(200).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }
@@ -45,7 +45,7 @@ export class userController {
   async deleteCommentController(req: Request, res: Response): Promise<void> {
     try {
       const result = await service.deleteCommentService(req.body);
-      res.status(200).json({ comments: result });
+      res.status(200).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }

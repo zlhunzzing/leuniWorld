@@ -8,7 +8,7 @@ export function signin(email: string, password: string, history: any) {
       password: password,
     })
     .then(async (res: any) => {
-      store.dispatch({ type: "SIGNIN" });
+      store.dispatch({ type: "SIGNIN", userId: res.data.id });
       document.cookie = `user = ${res.data.token}`;
       history.push("/");
     })
@@ -42,7 +42,7 @@ export function getCommnet(setMessageData: any, pager: any) {
       setMessageData(pager(res.data.comments));
     })
     .catch((err) => {
-      console.log(err.messages);
+      console.log(err.response);
     });
 }
 
@@ -64,4 +64,17 @@ export function addCommnet(
       setMessageData(pager(res.data.comments));
     })
     .catch((err) => console.log(err.response));
+}
+
+export function deleteComment(id: number, setMessageData: any, pager: any) {
+  if (window.confirm("댓글을 삭제하겠습니까?")) {
+    return axios
+      .delete("http://localhost:3000/user/comment", {
+        data: { id: id },
+      })
+      .then((res) => {
+        setMessageData(pager(res.data.comments));
+      })
+      .catch((err) => console.log(err.response));
+  }
 }

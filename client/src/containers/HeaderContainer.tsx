@@ -3,11 +3,13 @@ import store from "../store";
 import HeaderPresenter from "../presenters/HeaderPresenter";
 
 export default function HeaderContainer() {
-  const [isSignin, setIsSignin] = useState(store.getState().isSignin);
+  const [isSignUserId, setIsSignUserId] = useState(
+    store.getState().isSignUserId
+  );
 
   store.subscribe(() => {
-    setIsSignin(store.getState().isSignin);
+    setIsSignUserId(store.getState().isSignUserId);
   });
 
-  return <HeaderPresenter isSignin={isSignin} />;
+  return <HeaderPresenter isSignUserId={isSignUserId} />;
 }

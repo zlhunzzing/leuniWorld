@@ -30,7 +30,7 @@ export class userService {
     }
   }
 
-  async signinService(userInfo: signinData): Promise<void> {
+  async signinService(userInfo: signinData): Promise<object> {
     const shasum = crypto.createHmac("sha512", process.env.CRYPTO_SECRET_KEY);
     shasum.update(userInfo.password);
     userInfo.password = shasum.digest("hex");
@@ -52,15 +52,14 @@ export class userService {
           expiresIn: "1h",
         }
       );
-      return token;
+      return { token: token, id: result.id };
     } catch (err) {
       throw new Error(err);
     }
   }
 
   async getCommentService(): Promise<object> {
-    const comments = await guestbookModels.findAll();
-    return comments;
+    return { comments: await guestbookModels.findAll() };
   }
 
   async addCommentService(commentData, tokenData): Promise<object> {
@@ -74,8 +73,8 @@ export class userService {
     return await this.getCommentService();
   }
 
-  async deleteCommentService(info): Promise<object> {
-    const comment = await guestbookModels.findWithId(info.id);
+  async deleteCommentService(reqBody): Promise<object> {
+    const comment = await guestbookModels.findWithId(reqBody.id);
     comment.isDeleted = true;
     await guestbookModels.save(comment);
 
