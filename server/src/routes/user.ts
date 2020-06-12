@@ -26,4 +26,6 @@ router.post("/comment", jwtCheck, controller.addCommentController);
 
 router.get("/comment", controller.getCommentController);
 
+router.delete("/comment", controller.deleteCommentController);
+
 export default router;

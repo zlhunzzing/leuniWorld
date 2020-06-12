@@ -7,6 +7,18 @@ export class GuestbookModels {
   }
 
   async findAll() {
-    return await getRepository(Guestbook).find();
+    return await getRepository(Guestbook).find({
+      where: {
+        isDeleted: false,
+      },
+    });
+  }
+
+  async findWithId(id) {
+    return await getRepository(Guestbook).findOne({
+      where: {
+        id,
+      },
+    });
   }
 }

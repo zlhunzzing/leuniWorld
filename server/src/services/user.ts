@@ -73,4 +73,12 @@ export class userService {
 
     return await this.getCommentService();
   }
+
+  async deleteCommentService(info): Promise<object> {
+    const comment = await guestbookModels.findWithId(info.id);
+    comment.isDeleted = true;
+    await guestbookModels.save(comment);
+
+    return await this.getCommentService();
+  }
 }

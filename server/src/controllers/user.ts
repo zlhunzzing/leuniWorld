@@ -41,4 +41,13 @@ export class userController {
       res.status(409).send(err.message);
     }
   }
+
+  async deleteCommentController(req: Request, res: Response): Promise<void> {
+    try {
+      const result = await service.deleteCommentService(req.body);
+      res.status(200).json({ comments: result });
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
 }
