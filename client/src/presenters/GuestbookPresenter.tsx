@@ -4,20 +4,25 @@ import "../presenterStyles/GuestbookPresenter.css";
 import * as services from "../services/User";
 
 interface Props {
-  isSignUserId: any;
+  isSigninUserId: any;
   content: string;
   setContent: any;
   token: any;
   messageData: any;
   setMessageData: any;
   momenter: any;
+  handleMessagePaging: any;
   curPage: number;
   setCurPage: any;
-  pager: any;
+  pageIndex: any;
+  setPageIndex: any;
+  handlePageRange: any;
+  curPageIndex: number;
+  setCurPageIndex: any;
 }
 
 const GuestbookPresenter: React.FunctionComponent<Props> = ({
-  isSignUserId,
+  isSigninUserId,
   content,
   setContent,
   token,
@@ -26,7 +31,12 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
   momenter,
   curPage,
   setCurPage,
-  pager,
+  handleMessagePaging,
+  pageIndex,
+  setPageIndex,
+  handlePageRange,
+  curPageIndex,
+  setCurPageIndex,
 }: Props) => {
   return (
     <div className="Main">
@@ -43,39 +53,28 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
               return b.id - a.id;
             })
             .map((data: any, id: number) => (
-              <div
-                key={id}
-                style={{
-                  borderBottom: "1px solid black",
-                  height: "100px",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: "bold",
-                  }}
-                >
+              <div key={id} className="GuestbookBlock">
+                <div className="GuestbookHeader">
                   {data.username} {momenter(data.createdAt)}{" "}
-                  {Number(data.userId) === isSignUserId ? (
+                  {Number(data.userId) === isSigninUserId ? (
                     <span
                       onClick={() => {
-                        services.deleteComment(data.id, setMessageData, pager);
+                        services.deleteComment(
+                          data.id,
+                          setMessageData,
+                          handleMessagePaging,
+                          setPageIndex,
+                          handlePageRange
+                        );
                       }}
                     >
                       [삭제]
                     </span>
                   ) : null}
                 </div>
+
                 {data.content.split("<br>").map((line: string, id: number) => (
-                  <div
-                    key={id}
-                    style={{
-                      textAlign: "left",
-                      paddingLeft: "90px",
-                      paddingRight: "90px",
-                    }}
-                  >
+                  <div key={id} className="GuestbookContent">
                     {line}
                     <br />
                   </div>
@@ -85,30 +84,63 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
         )}
       </div>
 
+      {console.log(pageIndex)}
+
       <ul>
-        {messageData.length === 0 ? (
+        {pageIndex[curPageIndex - 2] ? (
+          <span
+            onClick={() => {
+              setCurPageIndex(curPageIndex - 1);
+            }}
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            [prev]
+          </span>
+        ) : null}
+        {pageIndex === 0 ? (
           <div>서버와 연결이 불안정합니다.</div>
         ) : (
-          messageData.map((page: any, id: number) => (
+          pageIndex[curPageIndex - 1].map((page: any, id: number) => (
             <li
               key={id}
               onClick={(x: any) => {
-                setCurPage(id + 1);
+                setCurPage(page);
               }}
             >
-              <a href={`#${id + 1}`}>{id + 1}</a>
+              <a href={`#${page}`}>{page}</a>
             </li>
           ))
         )}
+        {pageIndex[curPageIndex] ? (
+          <span
+            onClick={() => {
+              setCurPageIndex(curPageIndex + 1);
+            }}
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            [next]
+          </span>
+        ) : null}
       </ul>
 
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          services.addCommnet(content, token, setMessageData, pager);
+          services.addCommnet(
+            content,
+            token,
+            setMessageData,
+            handleMessagePaging,
+            setPageIndex,
+            handlePageRange
+          );
         }}
       >
-        {isSignUserId ? (
+        {isSigninUserId ? (
           <div>
             <textarea
               maxLength={140}

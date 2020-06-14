@@ -6,8 +6,20 @@
   overflow: hidden;
 }
 
-.usePage {
-  color: red;
+.GuestbookBlock {
+  border-bottom: 1px solid black;
+  height: 100px;
+  overflow: hidden;
+}
+
+.GuestbookHeader {
+  font-weight: bold;
+}
+
+.GuestbookContent {
+  text-align: left;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 ul {
