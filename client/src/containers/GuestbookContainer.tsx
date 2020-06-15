@@ -16,7 +16,7 @@ export default function GuestbookContainer() {
     isSigninUserId ? JSON.parse(JSON.stringify(rawToken))[2] : null
   )[0];
   const [messageData, setMessageData] = useState([]);
-  const listSize = useState(8)[0];
+  const listSize = useState(3)[0];
   const [curPage, setCurPage] = useState(1);
   const [pageIndex, setPageIndex] = useState(0);
   const pageRange = useState(10)[0];

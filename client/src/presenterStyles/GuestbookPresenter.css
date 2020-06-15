@@ -1,14 +1,14 @@
 .GuestbookChatbox {
   border: 1px solid black;
   width: 600px;
-  height: 510px;
+  height: 452px;
   margin: 0 auto;
   overflow: hidden;
 }
 
 .GuestbookBlock {
   border-bottom: 1px solid black;
-  height: 100px;
+  height: 150px;
   overflow: hidden;
 }
 

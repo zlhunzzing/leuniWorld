@@ -11,7 +11,7 @@ export default createStore(function (state: any, action: any) {
     return Object.assign({}, state, { isSignUserId: null });
   }
   if (action.type === "DONTMOUNT") {
-    return Object.assign({}, state, { isChatmount: true });
+    return Object.assign({}, state, { isChatmount: false });
   }
   return state;
 }, (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&

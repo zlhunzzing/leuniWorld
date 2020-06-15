@@ -2,6 +2,7 @@ import React from "react";
 import HeaderContainer from "../containers/HeaderContainer";
 import "../presenterStyles/GuestbookPresenter.css";
 import * as services from "../services/User";
+import { ERROR_MESSAGE } from "../common/ErrorMessages";
 
 interface Props {
   isSigninUserId: any;
@@ -46,7 +47,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
 
       <div className="GuestbookChatbox">
         {messageData.length === 0 ? (
-          <div>서버와 연결이 불안정합니다.</div>
+          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
         ) : (
           messageData[curPage - 1]
             .sort((a: any, b: any) => {
@@ -100,7 +101,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
           </span>
         ) : null}
         {pageIndex === 0 ? (
-          <div>서버와 연결이 불안정합니다.</div>
+          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
         ) : (
           pageIndex[curPageIndex - 1].map((page: any, id: number) => (
             <li
@@ -155,7 +156,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             <input type="submit" value="전송" />
           </div>
         ) : (
-          <div>로그인이 필요합니다.</div>
+          <div>{ERROR_MESSAGE.SIGNIN_REQUIRE}</div>
         )}
       </form>
     </div>

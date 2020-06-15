@@ -12,6 +12,9 @@ export default function MainPresenter() {
         <Link className="HeaderFavoriteMenu" to="/leunicaffee">
           르니카페
         </Link>
+        <Link className="HeaderFavoriteMenu" to="/freeboard">
+          자유게시판
+        </Link>
         <Link className="HeaderFavoriteMenu" to="/guestbook">
           방명록
         </Link>
