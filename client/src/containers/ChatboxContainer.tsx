@@ -7,7 +7,7 @@ const socketServer = io("http://localhost:3000");
 
 export default function ChatboxContainer() {
   const [content, setContent] = useState("");
-  const mounting = useState(store.getState().isChatmount)[0];
+  const mounting = useState(store.getState().Control.isChatmount)[0];
 
   useEffect(() => {
     socketServer.on("connect", () => {
@@ -18,7 +18,7 @@ export default function ChatboxContainer() {
       socketServer.on("sendMessage", (data: string) => {
         messageTemplate(data);
       });
-      store.dispatch({ type: "DONTMOUNT" });
+      store.dispatch({ type: "STOP_MOUNT" });
     }
   }, [mounting]);
 

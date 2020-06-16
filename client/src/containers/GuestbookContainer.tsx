@@ -6,7 +6,7 @@ import moment from "moment";
 
 export default function GuestbookContainer() {
   const [isSigninUserId, setIsSigninUserId] = useState(
-    store.getState().isSignUserId
+    store.getState().Auth.isSignUserId
   );
   const [content, setContent] = useState("");
   const rawToken = useState(
@@ -23,7 +23,7 @@ export default function GuestbookContainer() {
   const [curPageIndex, setCurPageIndex] = useState(1);
 
   store.subscribe(() => {
-    setIsSigninUserId(store.getState().isSignUserId);
+    setIsSigninUserId(store.getState().Auth.isSignUserId);
   });
 
   function handleMessagePaging(messageData: any) {
