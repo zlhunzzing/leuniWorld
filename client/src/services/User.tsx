@@ -1,5 +1,6 @@
 import axios from "axios";
-import store from "../store";
+import { store } from "../index";
+import * as authActions from "../modules/Auth";
 
 export function signin(email: string, password: string, history: any) {
   return axios
@@ -8,7 +9,7 @@ export function signin(email: string, password: string, history: any) {
       password: password,
     })
     .then(async (res: any) => {
-      store.dispatch({ type: "SIGNIN", userId: res.data.id });
+      store.dispatch(authActions.signin({ userId: res.data.id }));
       document.cookie = `user = ${res.data.token}`;
       history.push("/");
     })
@@ -35,18 +36,17 @@ export function signup(
     .catch((err) => console.log(err.response));
 }
 
-export function getComment(
-  setMessageData: any,
-  handleMessagePaging: any,
-  setPageIndex: any,
-  handlePageRange: any
-) {
+export function getComment(setMessageData: any, setPageIndex: any) {
   return axios
     .get("http://localhost:3000/user/comment")
     .then((res) => {
-      setMessageData(handleMessagePaging(res.data.comments)[0]);
-      const pageCnt = handleMessagePaging(res.data.comments)[1];
-      setPageIndex(handlePageRange(pageCnt));
+      setMessageData(
+        store.getState().Handle.messagePaging(res.data.comments)[0]
+      );
+      const pageCnt = store
+        .getState()
+        .Handle.messagePaging(res.data.comments)[1];
+      setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => {
       console.log(err.response);
@@ -57,9 +57,7 @@ export function addCommnet(
   content: string,
   token: any,
   setMessageData: any,
-  handleMessagePaging: any,
-  setPageIndex: any,
-  handlePageRange: any
+  setPageIndex: any
 ) {
   return axios
     .post(
@@ -70,9 +68,13 @@ export function addCommnet(
       { headers: { Authorization: token } }
     )
     .then((res) => {
-      setMessageData(handleMessagePaging(res.data.comments)[0]);
-      const pageCnt = handleMessagePaging(res.data.comments)[1];
-      setPageIndex(handlePageRange(pageCnt));
+      setMessageData(
+        store.getState().Handle.messagePaging(res.data.comments)[0]
+      );
+      const pageCnt = store
+        .getState()
+        .Handle.messagePaging(res.data.comments)[1];
+      setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => console.log(err.response));
 }
@@ -80,9 +82,7 @@ export function addCommnet(
 export function deleteComment(
   id: number,
   setMessageData: any,
-  handleMessagePaging: any,
-  setPageIndex: any,
-  handlePageRange: any
+  setPageIndex: any
 ) {
   if (window.confirm("댓글을 삭제하겠습니까?")) {
     return axios
@@ -90,9 +90,13 @@ export function deleteComment(
         data: { id: id },
       })
       .then((res) => {
-        setMessageData(handleMessagePaging(res.data.comments)[0]);
-        const pageCnt = handleMessagePaging(res.data.comments)[1];
-        setPageIndex(handlePageRange(pageCnt));
+        setMessageData(
+          store.getState().Handle.messagePaging(res.data.comments)[0]
+        );
+        const pageCnt = store
+          .getState()
+          .Handle.messagePaging(res.data.comments)[1];
+        setPageIndex(store.getState().Handle.messageRange(pageCnt));
       })
       .catch((err) => console.log(err.response));
   }

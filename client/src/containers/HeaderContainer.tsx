@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import store from "../store";
+import { store } from "../index";
 import HeaderPresenter from "../presenters/HeaderPresenter";
 
 export default function HeaderContainer() {
@@ -11,6 +11,5 @@ export default function HeaderContainer() {
     setIsSignUserId(store.getState().Auth.isSignUserId);
   });
 
-  console.log(store.getState().Auth.isSignUserId);
   return <HeaderPresenter isSignUserId={isSignUserId} />;
 }

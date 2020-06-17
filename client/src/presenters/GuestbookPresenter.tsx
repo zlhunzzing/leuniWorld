@@ -12,12 +12,10 @@ interface Props {
   messageData: any;
   setMessageData: any;
   momenter: any;
-  handleMessagePaging: any;
   curPage: number;
   setCurPage: any;
   pageIndex: any;
   setPageIndex: any;
-  handlePageRange: any;
   curPageIndex: number;
   setCurPageIndex: any;
 }
@@ -32,10 +30,8 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
   momenter,
   curPage,
   setCurPage,
-  handleMessagePaging,
   pageIndex,
   setPageIndex,
-  handlePageRange,
   curPageIndex,
   setCurPageIndex,
 }: Props) => {
@@ -63,9 +59,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
                         services.deleteComment(
                           data.id,
                           setMessageData,
-                          handleMessagePaging,
-                          setPageIndex,
-                          handlePageRange
+                          setPageIndex
                         );
                       }}
                     >
@@ -84,8 +78,6 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             ))
         )}
       </div>
-
-      {console.log(pageIndex)}
 
       <ul>
         {pageIndex[curPageIndex - 2] ? (
@@ -131,14 +123,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          services.addCommnet(
-            content,
-            token,
-            setMessageData,
-            handleMessagePaging,
-            setPageIndex,
-            handlePageRange
-          );
+          services.addCommnet(content, token, setMessageData, setPageIndex);
         }}
       >
         {isSigninUserId ? (

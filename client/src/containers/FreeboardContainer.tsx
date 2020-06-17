@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import FreeboardPresenter from "../presenters/FreeboardPresenter";
-import store from "../store";
-import * as services from "../services/User";
-import moment from "moment";
+// import store from "../store";
+// import { store } from "../index";
+// import * as services from "../services/User";
+// import moment from "moment";
 
 export default function FreeboardContainer() {
   // const [isSigninUserId, setIsSigninUserId] = useState(

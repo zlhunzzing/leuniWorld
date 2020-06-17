@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderContainer from "../containers/HeaderContainer";
 // import "../presenterStyles/GuestbookPresenter.css";
-import * as services from "../services/User";
+// import * as services from "../services/User";
 
 interface Props {
   // isSigninUserId: any;
@@ -21,22 +21,24 @@ interface Props {
   // setCurPageIndex: any;
 }
 
-const FreeboardPresenter: React.FunctionComponent<Props> = ({}: // isSigninUserId,
-// content,
-// setContent,
-// token,
-// messageData,
-// setMessageData,
-// momenter,
-// curPage,
-// setCurPage,
-// handleMessagePaging,
-// pageIndex,
-// setPageIndex,
-// handlePageRange,
-// curPageIndex,
-// setCurPageIndex,
-Props) => {
+const FreeboardPresenter: React.FunctionComponent<Props> = (
+  // isSigninUserId,
+  // content,
+  // setContent,
+  // token,
+  // messageData,
+  // setMessageData,
+  // momenter,
+  // curPage,
+  // setCurPage,
+  // handleMessagePaging,
+  // pageIndex,
+  // setPageIndex,
+  // handlePageRange,
+  // curPageIndex,
+  // setCurPageIndex,
+  Props
+) => {
   return (
     <div className="Main">
       <HeaderContainer></HeaderContainer>
