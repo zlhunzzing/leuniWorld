@@ -1,10 +1,10 @@
 import * as express from "express";
-import { userController } from "../controllers/user";
+import { UserController } from "../controllers/UserController";
 import jwt from "jsonwebtoken";
-import { ERROR_MESSAGE } from "../common/ErrorMessages";
+import { ERROR_MESSAGE } from "../common/errorMessages";
 
 const router: express.Router = express.Router();
-const controller = new userController();
+const controller = new UserController();
 
 const jwtCheck = (req, res, next) => {
   const token = req.headers.authorization;

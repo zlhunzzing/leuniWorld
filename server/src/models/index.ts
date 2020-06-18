@@ -1,2 +1,2 @@
-export { UserModels } from "./user";
-export { GuestbookModels } from "./guestbook";
+export { UserModel } from "./UserModel";
+export { GuestbookModel } from "./GuestbookModel";

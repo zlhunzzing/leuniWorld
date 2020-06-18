@@ -5,7 +5,7 @@ chai.use(chaiHttp);
 import app from "../app";
 import { createConnection } from "typeorm";
 import { getRepository } from "typeorm";
-import { User } from "../entity/user";
+import { UserEntity } from "../entity/UserEntity";
 
 describe("Implemented testcase", () => {
   createConnection();
