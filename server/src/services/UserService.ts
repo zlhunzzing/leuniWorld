@@ -1,10 +1,11 @@
-import { UserModel, GuestbookModel } from "../models";
+import { UserModel, GuestbookModel, FreeboardModel } from "../models";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
-const userModels = new UserModel();
-const guestbookModels = new GuestbookModel();
+const userModel = new UserModel();
+const guestbookModel = new GuestbookModel();
+const freeboardModel = new FreeboardModel();
 
 interface signupData {
   email;
@@ -23,8 +24,8 @@ export class UserService {
     userInfo.password = shasum.digest("hex");
 
     try {
-      await userModels.findOneWithEmail(userInfo.email);
-      await userModels.save(userInfo);
+      await userModel.findOneWithEmail(userInfo.email);
+      await userModel.save(userInfo);
     } catch (err) {
       throw new Error(err);
     }
@@ -36,7 +37,7 @@ export class UserService {
     userInfo.password = shasum.digest("hex");
 
     try {
-      const result = await userModels.findOneAccount(
+      const result = await userModel.findOneAccount(
         userInfo.email,
         userInfo.password
       );
@@ -58,26 +59,41 @@ export class UserService {
     }
   }
 
-  async getCommentService(): Promise<object> {
-    return { comments: await guestbookModels.findAll() };
+  async getGuestbookService(): Promise<object> {
+    return { guestbooks: await guestbookModel.findAll() };
   }
 
-  async addCommentService(commentData, tokenData): Promise<object> {
+  async addGuestbookService(guestbookData, tokenData): Promise<object> {
     const insertData = {
-      ...commentData,
+      ...guestbookData,
       userId: tokenData.id,
       username: tokenData.username,
     };
-    await guestbookModels.save(insertData);
+    await guestbookModel.save(insertData);
 
-    return await this.getCommentService();
+    return await this.getGuestbookService();
   }
 
-  async deleteCommentService(reqBody): Promise<object> {
-    const comment = await guestbookModels.findWithId(reqBody.id);
-    comment.isDeleted = true;
-    await guestbookModels.save(comment);
+  async deleteGuestbookService(reqBody): Promise<object> {
+    const guestbook = await guestbookModel.findWithId(reqBody.id);
+    guestbook.isDeleted = true;
+    await guestbookModel.save(guestbook);
 
-    return await this.getCommentService();
+    return await this.getGuestbookService();
+  }
+
+  async getFreeboardService(): Promise<object> {
+    return { freeboards: await freeboardModel.findAll() };
+  }
+
+  async addFreeboardService(freeboradData, tokenData): Promise<object> {
+    const insertData = {
+      ...freeboradData,
+      userId: tokenData.id,
+      username: tokenData.username,
+    };
+    await freeboardModel.save(insertData);
+
+    return await this.getFreeboardService();
   }
 }

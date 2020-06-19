@@ -36,16 +36,16 @@ export function signup(
     .catch((err) => console.log(err.response));
 }
 
-export function getComment(setMessageData: any, setPageIndex: any) {
+export function getGuestbook(setMessageData: any, setPageIndex: any) {
   return axios
-    .get("http://localhost:3000/user/comment")
+    .get("http://localhost:3000/user/guestbook")
     .then((res) => {
       setMessageData(
-        store.getState().Handle.messagePaging(res.data.comments)[0]
+        store.getState().Handle.messagePaging(res.data.guestbooks)[0]
       );
       const pageCnt = store
         .getState()
-        .Handle.messagePaging(res.data.comments)[1];
+        .Handle.messagePaging(res.data.guestbooks)[1];
       setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => {
@@ -61,7 +61,7 @@ export function addCommnet(
 ) {
   return axios
     .post(
-      "http://localhost:3000/user/comment",
+      "http://localhost:3000/user/guestbook",
       {
         content: content.replace(/\n/g, "<br>"),
       },
@@ -69,33 +69,33 @@ export function addCommnet(
     )
     .then((res) => {
       setMessageData(
-        store.getState().Handle.messagePaging(res.data.comments)[0]
+        store.getState().Handle.messagePaging(res.data.guestbooks)[0]
       );
       const pageCnt = store
         .getState()
-        .Handle.messagePaging(res.data.comments)[1];
+        .Handle.messagePaging(res.data.guestbooks)[1];
       setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => console.log(err.response));
 }
 
-export function deleteComment(
+export function deleteGuestbook(
   id: number,
   setMessageData: any,
   setPageIndex: any
 ) {
   if (window.confirm("댓글을 삭제하겠습니까?")) {
     return axios
-      .delete("http://localhost:3000/user/comment", {
+      .delete("http://localhost:3000/user/guestbook", {
         data: { id: id },
       })
       .then((res) => {
         setMessageData(
-          store.getState().Handle.messagePaging(res.data.comments)[0]
+          store.getState().Handle.messagePaging(res.data.guestbooks)[0]
         );
         const pageCnt = store
           .getState()
-          .Handle.messagePaging(res.data.comments)[1];
+          .Handle.messagePaging(res.data.guestbooks)[1];
         setPageIndex(store.getState().Handle.messageRange(pageCnt));
       })
       .catch((err) => console.log(err.response));

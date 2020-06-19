@@ -42,9 +42,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
       <div className="HeaderFavoriteMenus">방명록</div>
 
       <div className="GuestbookChatbox">
-        {messageData.length === 0 ? (
-          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
-        ) : (
+        {messageData[curPage - 1] ? (
           messageData[curPage - 1]
             .sort((a: any, b: any) => {
               return b.id - a.id;
@@ -56,7 +54,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
                   {Number(data.userId) === isSigninUserId ? (
                     <span
                       onClick={() => {
-                        services.deleteComment(
+                        services.deleteGuestbook(
                           data.id,
                           setMessageData,
                           setPageIndex
@@ -76,6 +74,8 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
                 ))}
               </div>
             ))
+        ) : (
+          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
         )}
       </div>
 
@@ -92,9 +92,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             [prev]
           </span>
         ) : null}
-        {pageIndex === 0 ? (
-          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
-        ) : (
+        {pageIndex[curPageIndex - 1] ? (
           pageIndex[curPageIndex - 1].map((page: any, id: number) => (
             <li
               key={id}
@@ -105,6 +103,8 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
               <a href={`#${page}`}>{page}</a>
             </li>
           ))
+        ) : (
+          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
         )}
         {pageIndex[curPageIndex] ? (
           <span

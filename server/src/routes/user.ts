@@ -22,10 +22,12 @@ router.post("/signup", controller.signupController);
 
 router.post("/signin", controller.signinController);
 
-router.post("/comment", jwtCheck, controller.addCommentController);
+router.post("/guestbook", jwtCheck, controller.addGuestbookController);
 
-router.get("/comment", controller.getCommentController);
+router.get("/guestbook", controller.getGuestbookController);
 
-router.delete("/comment", controller.deleteCommentController);
+router.delete("/guestbook", controller.deleteGuestbookController);
+
+router.post("/freeboard", jwtCheck, controller.addFreeboardController);
 
 export default router;

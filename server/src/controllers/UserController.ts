@@ -24,28 +24,37 @@ export class UserController {
     }
   }
 
-  async addCommentController(req: TokenReq, res: Response): Promise<void> {
+  async addGuestbookController(req: TokenReq, res: Response): Promise<void> {
     try {
-      const result = await service.addCommentService(req.body, req.tokenData);
+      const result = await service.addGuestbookService(req.body, req.tokenData);
       res.status(201).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }
   }
 
-  async getCommentController(req: Request, res: Response): Promise<void> {
+  async getGuestbookController(req: Request, res: Response): Promise<void> {
     try {
-      const result = await service.getCommentService();
+      const result = await service.getGuestbookService();
       res.status(200).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }
   }
 
-  async deleteCommentController(req: Request, res: Response): Promise<void> {
+  async deleteGuestbookController(req: Request, res: Response): Promise<void> {
     try {
-      const result = await service.deleteCommentService(req.body);
+      const result = await service.deleteGuestbookService(req.body);
       res.status(200).json(result);
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
+
+  async addFreeboardController(req: TokenReq, res: Response): Promise<void> {
+    try {
+      const result = await service.addFreeboardService(req.body, req.tokenData);
+      res.status(201).json(result);
     } catch (err) {
       res.status(409).send(err.message);
     }

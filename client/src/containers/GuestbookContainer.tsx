@@ -25,7 +25,7 @@ export default function GuestbookContainer() {
   });
 
   useEffect(() => {
-    services.getComment(setMessageData, setPageIndex);
+    services.getGuestbook(setMessageData, setPageIndex);
   }, []);
 
   function momenter(time: any) {
