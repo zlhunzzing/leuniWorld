@@ -30,4 +30,8 @@ router.delete("/guestbook", controller.deleteGuestbookController);
 
 router.post("/freeboard", jwtCheck, controller.addFreeboardController);
 
+router.get("/freeboard", controller.getFreeboardController);
+
+router.get("/boardview/:postId", controller.getBoardviewController);
+
 export default router;

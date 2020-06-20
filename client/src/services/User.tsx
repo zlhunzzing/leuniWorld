@@ -53,7 +53,7 @@ export function getGuestbook(setMessageData: any, setPageIndex: any) {
     });
 }
 
-export function addCommnet(
+export function addGuestbook(
   content: string,
   token: any,
   setMessageData: any,
@@ -100,4 +100,19 @@ export function deleteGuestbook(
       })
       .catch((err) => console.log(err.response));
   }
+}
+
+export function getFreeboard(setList: any) {
+  return axios
+    .get("http://localhost:3000/user/freeboard")
+    .then((res) => {
+      setList(res.data.freeboards);
+      // const pageCnt = store
+      //   .getState()
+      //   .Handle.messagePaging(res.data.freeboards)[1];
+      // setPageIndex(store.getState().Handle.messageRange(pageCnt));
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
 }

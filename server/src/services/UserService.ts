@@ -96,4 +96,8 @@ export class UserService {
 
     return await this.getFreeboardService();
   }
+
+  async getBoardviewService(postId): Promise<object> {
+    return { boardview: await freeboardModel.findWithId(postId) };
+  }
 }

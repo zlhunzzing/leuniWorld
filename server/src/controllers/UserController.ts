@@ -59,4 +59,22 @@ export class UserController {
       res.status(409).send(err.message);
     }
   }
+
+  async getFreeboardController(req: Request, res: Response): Promise<void> {
+    try {
+      const result = await service.getFreeboardService();
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
+
+  async getBoardviewController(req: Request, res: Response): Promise<void> {
+    try {
+      const result = await service.getBoardviewService(req.params.postId);
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
 }

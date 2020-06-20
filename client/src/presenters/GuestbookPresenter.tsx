@@ -123,7 +123,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          services.addCommnet(content, token, setMessageData, setPageIndex);
+          services.addGuestbook(content, token, setMessageData, setPageIndex);
         }}
       >
         {isSigninUserId ? (

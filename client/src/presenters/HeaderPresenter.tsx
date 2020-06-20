@@ -15,7 +15,7 @@ const HeaderPresenter: React.FunctionComponent<Props> = ({
       <div className="SignupBar">
         {isSignUserId ? <SignoutContainer /> : <Link to="/signin">로그인</Link>}
       </div>
-      <Link className="Title" to="main">
+      <Link className="Title" to="/main">
         르니월드
       </Link>
     </header>

@@ -1,58 +1,58 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HeaderContainer from "../containers/HeaderContainer";
 // import "../presenterStyles/GuestbookPresenter.css";
 // import * as services from "../services/User";
+import { ERROR_MESSAGE } from "../common/ErrorMessages";
 
 interface Props {
   // isSigninUserId: any;
   // content: string;
   // setContent: any;
   // token: any;
-  // messageData: any;
-  // setMessageData: any;
+  list: any;
+  setList: any;
   // momenter: any;
-  // handleMessagePaging: any;
   // curPage: number;
   // setCurPage: any;
   // pageIndex: any;
   // setPageIndex: any;
-  // handlePageRange: any;
   // curPageIndex: number;
   // setCurPageIndex: any;
 }
 
-const FreeboardPresenter: React.FunctionComponent<Props> = (
+const FreeboardPresenter: React.FunctionComponent<Props> = ({
   // isSigninUserId,
   // content,
   // setContent,
   // token,
-  // messageData,
-  // setMessageData,
-  // momenter,
-  // curPage,
-  // setCurPage,
-  // handleMessagePaging,
-  // pageIndex,
-  // setPageIndex,
-  // handlePageRange,
-  // curPageIndex,
-  // setCurPageIndex,
-  Props
-) => {
+  list,
+  setList,
+}: // momenter,
+// curPage,
+// setCurPage,
+// pageIndex,
+// setPageIndex,
+// curPageIndex,
+// setCurPageIndex,
+Props) => {
   return (
     <div className="Main">
       <HeaderContainer></HeaderContainer>
-
       <div className="HeaderFavoriteMenus">자유게시판</div>
 
       <div className="GuestbookChatbox">
-        <div
-          style={{
-            borderBottom: "1px solid black",
-          }}
-        >
-          글제목
-        </div>
+        {list ? (
+          list.map((data: any, id: number) => (
+            <div key={id}>
+              <Link to={`/boardview/${data.id}`} onClick={() => console.log(1)}>
+                {data.title}
+              </Link>
+            </div>
+          ))
+        ) : (
+          <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
+        )}
       </div>
     </div>
   );
