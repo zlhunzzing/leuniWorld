@@ -5,7 +5,7 @@ import * as services from "../services/User";
 import { ERROR_MESSAGE } from "../common/ErrorMessages";
 
 interface Props {
-  isSigninUserId: any;
+  signinUserId: any;
   content: string;
   setContent: any;
   token: any;
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const GuestbookPresenter: React.FunctionComponent<Props> = ({
-  isSigninUserId,
+  signinUserId,
   content,
   setContent,
   token,
@@ -51,7 +51,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
               <div key={id} className="GuestbookBlock">
                 <div className="GuestbookHeader">
                   {data.username} {momenter(data.createdAt)}{" "}
-                  {Number(data.userId) === isSigninUserId ? (
+                  {Number(data.userId) === signinUserId ? (
                     <span
                       onClick={() => {
                         services.deleteGuestbook(
@@ -126,7 +126,7 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
           services.addGuestbook(content, token, setMessageData, setPageIndex);
         }}
       >
-        {isSigninUserId ? (
+        {signinUserId ? (
           <div>
             <textarea
               maxLength={140}

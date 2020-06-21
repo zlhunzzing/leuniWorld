@@ -9,16 +9,15 @@ export const signin = createAction(SIGNIN);
 export const signout = createAction(SIGNOUT);
 
 const initialState = {
-  isSignUserId: null,
+  signinUserId: null,
 };
 
 export default function Auth(state = initialState, action: any) {
   switch (action.type) {
     case SIGNIN:
-      console.log(action);
-      return { ...state, isSignUserId: action.payload.userId };
+      return { ...state, signinUserId: action.payload.userId };
     case SIGNOUT:
-      return { ...state, isSignUserId: null };
+      return { ...state, signinUserId: null };
     default:
       return state;
   }

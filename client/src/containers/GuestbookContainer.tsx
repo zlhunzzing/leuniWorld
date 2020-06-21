@@ -5,15 +5,15 @@ import * as services from "../services/User";
 import moment from "moment";
 
 export default function GuestbookContainer() {
-  const [isSigninUserId, setIsSigninUserId] = useState(
-    store.getState().Auth.isSignUserId
+  const [signinUserId, setSigninUserId] = useState(
+    store.getState().Auth.signinUserId
   );
   const [content, setContent] = useState("");
   const rawToken = useState(
     document.cookie.match("(^|;) ?user=([^;]*)(;|$)")
   )[0];
   const token = useState(
-    isSigninUserId ? JSON.parse(JSON.stringify(rawToken))[2] : null
+    signinUserId ? JSON.parse(JSON.stringify(rawToken))[2] : null
   )[0];
   const [messageData, setMessageData] = useState([]);
   const [curPage, setCurPage] = useState(1);
@@ -21,7 +21,7 @@ export default function GuestbookContainer() {
   const [curPageIndex, setCurPageIndex] = useState(1);
 
   store.subscribe(() => {
-    setIsSigninUserId(store.getState().Auth.isSignUserId);
+    setSigninUserId(store.getState().Auth.signinUserId);
   });
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function GuestbookContainer() {
 
   return (
     <GuestbookPresenter
-      isSigninUserId={isSigninUserId}
+      signinUserId={signinUserId}
       content={content}
       setContent={setContent}
       token={token}

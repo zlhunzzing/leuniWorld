@@ -1,46 +1,36 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HeaderContainer from "../containers/HeaderContainer";
-// import "../presenterStyles/GuestbookPresenter.css";
-// import * as services from "../services/User";
-// import { ERROR_MESSAGE } from "../common/ErrorMessages";
 
 interface Props {
-  //   isSigninUserId: any;
-  //   content: string;
-  //   setContent: any;
-  //   token: any;
-  //   messageData: any;
-  //   setMessageData: any;
-  //   momenter: any;
-  //   curPage: number;
-  //   setCurPage: any;
-  //   pageIndex: any;
-  //   setPageIndex: any;
-  //   curPageIndex: number;
-  //   setCurPageIndex: any;
+  postInfo: any;
 }
 
-const BoardviewPresenter: React.FunctionComponent<Props> = ({}: //   isSigninUserId,
-//   content,
-//   setContent,
-//   token,
-//   messageData,
-//   setMessageData,
-//   momenter,
-//   curPage,
-//   setCurPage,
-//   pageIndex,
-//   setPageIndex,
-//   curPageIndex,
-//   setCurPageIndex,
-Props) => {
+const BoardviewPresenter: React.FunctionComponent<Props> = ({
+  postInfo,
+}: Props) => {
   return (
     <div className="Main">
       <HeaderContainer></HeaderContainer>
 
-      <div className="HeaderFavoriteMenus">{<br></br>}</div>
+      <div className="HeaderFavoriteMenus">
+        <Link className="HeaderFavoriteMenu" to="/freeboard">
+          자유게시판
+        </Link>
+      </div>
 
-      <div className="GuestbookChatbox"></div>
+      {postInfo ? (
+        <div
+          className="GuestbookChatbox"
+          style={{
+            textAlign: "left",
+          }}
+        >
+          <span>제목: {postInfo.title}</span>{" "}
+          <span>작성일: {postInfo.createdAt}</span>
+          <div>내용: {postInfo.content}</div>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -29,8 +29,6 @@ export function signup(
       username: username,
     })
     .then((res) => {
-      console.log(res.status);
-      console.log("his", history);
       history.push("/signin");
     })
     .catch((err) => console.log(err.response));
@@ -115,4 +113,41 @@ export function getFreeboard(setList: any) {
     .catch((err) => {
       console.log(err.response);
     });
+}
+
+export function getBoardview(setPostInfo: any) {
+  return axios
+    .get(
+      `http://localhost:3000/user/boardview/${
+        store.getState().Handle.curPostId
+      }`
+    )
+    .then((res) => {
+      setPostInfo(res.data.boardview);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
+}
+
+export function addFreeboard(
+  title: string,
+  content: string,
+  token: any,
+  history: any
+) {
+  console.log(typeof title, typeof content, token);
+  return axios
+    .post(
+      "http://localhost:3000/user/freeboard",
+      {
+        title,
+        content: content.replace(/\n/g, "<br>"),
+      },
+      { headers: { Authorization: token } }
+    )
+    .then((res) => {
+      history.push("/freeboard");
+    })
+    .catch((err) => console.log(err.response));
 }
