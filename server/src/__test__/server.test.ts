@@ -66,12 +66,6 @@ describe("Implemented testcase", () => {
   });
 
   describe("guesbook test", () => {
-    afterEach(async () => {
-      await getRepository(GuestbookEntity).query(
-        `TRUNCATE TABLE guestbook_entity;`
-      );
-    });
-
     describe("POST /user/guestbook", () => {
       it("it should response 201 status code and guestbooks", (done) => {
         const agent = chai.request.agent(app);
@@ -85,6 +79,40 @@ describe("Implemented testcase", () => {
             if (err) done(err);
             expect(res).to.have.status(201);
             expect(res.body).to.have.property("guestbooks");
+            done();
+          });
+      });
+    });
+
+    describe("GET /user/guestbook", () => {
+      it("it should response 200 status code and guestbooks", (done) => {
+        const agent = chai.request.agent(app);
+        agent.get("/user/guestbook").end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property("guestbooks");
+          done();
+        });
+      });
+    });
+
+    describe("DELETE /user/guestbook", () => {
+      afterEach(async () => {
+        await getRepository(GuestbookEntity).query(
+          `TRUNCATE TABLE guestbook_entity;`
+        );
+      });
+
+      it("it should response 200 status code", (done) => {
+        const agent = chai.request.agent(app);
+        agent
+          .delete("/user/guestbook")
+          .send({
+            id: 1,
+          })
+          .end((err, res) => {
+            if (err) done(err);
+            expect(res).to.have.status(200);
             done();
           });
       });

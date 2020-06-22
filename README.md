@@ -6,6 +6,8 @@
 
 - 회원가입 & 로그인 & 로그아웃
 
+()
+
 - 실시간 채팅
 
 ![chat](./readme/image/caffeeChat.png)
@@ -13,6 +15,10 @@
 - 방명록
 
 ![guestbook](./readme/image/guestbook.png)
+
+- 자유게시판
+
+()
 
 ## 설치 방법 (Installation)
 

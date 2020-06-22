@@ -14,7 +14,7 @@ const initialState = {
   messagePaging: (messageData: any) => {
     let pagingData = [];
     let onePageData = [];
-    for (let i = messageData.length - 1; i > 0; i--) {
+    for (let i = messageData.length - 1; i >= 0; i--) {
       onePageData.push(messageData[i]);
       if (onePageData.length === initialState.listSize) {
         pagingData.push(onePageData);

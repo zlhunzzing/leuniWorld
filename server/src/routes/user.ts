@@ -34,4 +34,6 @@ router.get("/freeboard", controller.getFreeboardController);
 
 router.get("/boardview/:postId", controller.getBoardviewController);
 
+router.put("/boardview/:postId", jwtCheck, controller.putBoardviewController);
+
 export default router;

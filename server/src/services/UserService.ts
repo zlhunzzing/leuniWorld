@@ -100,4 +100,15 @@ export class UserService {
   async getBoardviewService(postId): Promise<object> {
     return { boardview: await freeboardModel.findWithId(postId) };
   }
+
+  async putBoardviewService(boardviewData, postId): Promise<object> {
+    const post = await freeboardModel.findWithId(postId);
+    const insertData = {
+      ...post,
+      ...boardviewData,
+    };
+    await freeboardModel.save(insertData);
+
+    return await this.getBoardviewService(postId);
+  }
 }

@@ -7,7 +7,7 @@ module.exports = {
     "plugin:react/recommended",
   ],
   rules: {
-    quotes: ["error", "single"],
+    quotes: ["error", "double"],
     "import/extensions": [
       "error",
       "ignorePackages",

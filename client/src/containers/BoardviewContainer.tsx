@@ -9,7 +9,5 @@ export default function BoardviewContainer() {
     services.getBoardview(setPostInfo);
   }, []);
 
-  console.log(postInfo);
-
   return <BoardviewPresenter postInfo={postInfo} />;
 }

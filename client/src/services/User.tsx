@@ -38,6 +38,7 @@ export function getGuestbook(setMessageData: any, setPageIndex: any) {
   return axios
     .get("http://localhost:3000/user/guestbook")
     .then((res) => {
+      console.log(res.data.guestbooks);
       setMessageData(
         store.getState().Handle.messagePaging(res.data.guestbooks)[0]
       );

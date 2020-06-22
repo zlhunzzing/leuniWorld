@@ -77,4 +77,16 @@ export class UserController {
       res.status(409).send(err.message);
     }
   }
+
+  async putBoardviewController(req: Request, res: Response): Promise<void> {
+    try {
+      const result = await service.putBoardviewService(
+        req.body,
+        req.params.postId
+      );
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
 }
