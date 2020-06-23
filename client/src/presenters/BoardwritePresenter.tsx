@@ -1,7 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import HeaderContainer from "../containers/HeaderContainer";
-// import "../presenterStyles/MainPresenter.css";
 import * as services from "../services/User";
 
 interface Props {

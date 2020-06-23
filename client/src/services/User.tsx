@@ -9,8 +9,9 @@ export function signin(email: string, password: string, history: any) {
       password: password,
     })
     .then(async (res: any) => {
-      store.dispatch(authActions.signin({ userId: res.data.id }));
       document.cookie = `user = ${res.data.token}`;
+      store.dispatch(authActions.signin({ userId: res.data.id }));
+      // console.log(store.getState().Auth.token);
       history.push("/");
     })
     .catch((err) => console.log(err.response));
@@ -64,7 +65,11 @@ export function addGuestbook(
       {
         content: content.replace(/\n/g, "<br>"),
       },
-      { headers: { Authorization: token } }
+      {
+        headers: {
+          Authorization: document.cookie.match("(^|;) ?user=([^;]*)(;|$)"),
+        },
+      }
     )
     .then((res) => {
       setMessageData(
@@ -151,4 +156,29 @@ export function addFreeboard(
       history.push("/freeboard");
     })
     .catch((err) => console.log(err.response));
+}
+
+export function putBoardview(
+  title: string,
+  content: string,
+  token: any,
+  history: any
+) {
+  return axios
+    .put(
+      `http://localhost:3000/user/boardview/${
+        store.getState().Handle.curPostId
+      }`,
+      {
+        title,
+        content: content.replace(/\n/g, "<br>"),
+      },
+      { headers: { Authorization: token } }
+    )
+    .then((res) => {
+      history.push(`/freeboard`);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });
 }
