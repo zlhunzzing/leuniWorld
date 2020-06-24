@@ -121,13 +121,9 @@ export function getFreeboard(setList: any) {
     });
 }
 
-export function getBoardview(setPostInfo: any) {
+export function getBoardview(setPostInfo: any, paramsId: number) {
   return axios
-    .get(
-      `http://localhost:3000/user/boardview/${
-        store.getState().Handle.curPostId
-      }`
-    )
+    .get(`http://localhost:3000/user/boardview/${paramsId}`)
     .then((res) => {
       setPostInfo(res.data.boardview);
     })
@@ -162,13 +158,12 @@ export function putBoardview(
   title: string,
   content: string,
   token: any,
-  history: any
+  setIsPut: any,
+  paramsId: number
 ) {
   return axios
     .put(
-      `http://localhost:3000/user/boardview/${
-        store.getState().Handle.curPostId
-      }`,
+      `http://localhost:3000/user/boardview/${paramsId}`,
       {
         title,
         content: content.replace(/\n/g, "<br>"),
@@ -176,7 +171,7 @@ export function putBoardview(
       { headers: { Authorization: token } }
     )
     .then((res) => {
-      history.push(`/freeboard`);
+      setIsPut(false);
     })
     .catch((err) => {
       console.log(err.response);

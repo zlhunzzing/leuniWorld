@@ -5,9 +5,6 @@ export const SET_CUR_POST_ID = "app/Handle/SET_CUR_POST_ID";
 
 export const stopMount = createAction(STOP_MOUNT);
 
-export const setPostId = createAction(SET_CUR_POST_ID);
-// payload: {curPostId: 1}
-
 const initialState = {
   isChatmount: true,
   listSize: 3,
@@ -42,15 +39,12 @@ const initialState = {
     }
     return rangeData;
   },
-  curPostId: null,
 };
 
 export default function Handle(state = initialState, action: any) {
   switch (action.type) {
     case STOP_MOUNT:
       return { ...state, isChatmount: false };
-    case SET_CUR_POST_ID:
-      return { ...state, curPostId: action.payload.postId };
     default:
       return state;
   }

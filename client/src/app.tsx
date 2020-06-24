@@ -20,7 +20,10 @@ export default function App() {
         <Route path="/signin" render={() => <Signin></Signin>}></Route>
         <Route path="/guestbook" render={() => <Guestbook></Guestbook>}></Route>
         <Route path="/freeboard" render={() => <Freeboard></Freeboard>}></Route>
-        <Route path="/boardview" render={() => <Boardview></Boardview>}></Route>
+        <Route
+          path="/boardview/:id"
+          render={() => <Boardview></Boardview>}
+        ></Route>
         <Route
           path="/boardwrite"
           render={() => <Boardwrite></Boardwrite>}

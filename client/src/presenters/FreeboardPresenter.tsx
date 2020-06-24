@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import HeaderContainer from "../containers/HeaderContainer";
 import { ERROR_MESSAGE } from "../common/ErrorMessages";
-import { store } from "../index";
-import * as handleActions from "../modules/Handle";
 
 interface Props {
   list: any;
@@ -25,14 +23,7 @@ const FreeboardPresenter: React.FunctionComponent<Props> = ({
         {list ? (
           list.map((data: any, id: number) => (
             <div key={id}>
-              <Link
-                to={`/boardview/${data.id}`}
-                onClick={() =>
-                  store.dispatch(handleActions.setPostId({ postId: data.id }))
-                }
-              >
-                {data.title}
-              </Link>
+              <Link to={`/boardview/${data.id}`}>{data.title}</Link>
             </div>
           ))
         ) : (

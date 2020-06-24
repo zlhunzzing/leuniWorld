@@ -13,8 +13,8 @@ interface Props {
   setTitle: any;
   content: string;
   setContent: any;
-  history: any;
   token: any;
+  params: any;
 }
 
 const BoardviewPresenter: React.FunctionComponent<Props> = ({
@@ -26,8 +26,8 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
   setTitle,
   content,
   setContent,
-  history,
   token,
+  params,
 }: Props) => {
   return isPut === false ? (
     <div className="Main">
@@ -85,7 +85,7 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            services.putBoardview(title, content, token, history);
+            services.putBoardview(title, content, token, setIsPut, params.id);
           }}
         >
           제목 :{" "}
