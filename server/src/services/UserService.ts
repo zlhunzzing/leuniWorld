@@ -111,4 +111,14 @@ export class UserService {
 
     return await this.getBoardviewService(postId);
   }
+
+  async deleteBoardviewService(postId): Promise<void> {
+    try {
+      const freeboard = await freeboardModel.findWithId(postId);
+      freeboard.isDeleted = true;
+      await freeboardModel.save(freeboard);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 }

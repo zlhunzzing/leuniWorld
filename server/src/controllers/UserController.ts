@@ -89,4 +89,13 @@ export class UserController {
       res.status(409).send(err.message);
     }
   }
+
+  async deleteBoardviewController(req: Request, res: Response): Promise<void> {
+    try {
+      await service.deleteBoardviewService(req.params.postId);
+      res.status(200).end();
+    } catch (err) {
+      res.status(409).send(err.message);
+    }
+  }
 }

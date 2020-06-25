@@ -36,4 +36,6 @@ router.get("/boardview/:postId", controller.getBoardviewController);
 
 router.put("/boardview/:postId", jwtCheck, controller.putBoardviewController);
 
+router.delete("/boardview/:postId", controller.deleteBoardviewController);
+
 export default router;

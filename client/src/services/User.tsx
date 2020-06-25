@@ -177,3 +177,16 @@ export function putBoardview(
       console.log(err.response);
     });
 }
+
+export function deleteBoardview(id: number, history: any) {
+  if (window.confirm("댓글을 삭제하겠습니까?")) {
+    return axios
+      .delete(`http://localhost:3000/user/boardview/${id}`, {
+        data: { id: id },
+      })
+      .then((res) => {
+        history.push("/freeboard");
+      })
+      .catch((err) => console.log(err.response));
+  }
+}

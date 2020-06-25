@@ -15,6 +15,7 @@ interface Props {
   setContent: any;
   token: any;
   params: any;
+  history: any;
 }
 
 const BoardviewPresenter: React.FunctionComponent<Props> = ({
@@ -28,6 +29,7 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
   setContent,
   token,
   params,
+  history,
 }: Props) => {
   return isPut === false ? (
     <div className="Main">
@@ -64,6 +66,19 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
         }}
       >
         글수정
+      </button>
+      <button
+        onClick={() => {
+          if (window.confirm("글을 삭제하시겠습니까?")) {
+            if (signinUserId === Number(postInfo.userId)) {
+              services.deleteBoardview(params.id, history);
+            } else {
+              alert(ERROR_MESSAGE.WRONG_USER);
+            }
+          }
+        }}
+      >
+        글삭제
       </button>
     </div>
   ) : (

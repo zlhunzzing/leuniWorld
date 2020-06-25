@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BoardviewPresenter from "../presenters/BoardviewPresenter";
 import * as services from "../services/User";
 import { store } from "../index";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 
 export default function BoardviewContainer() {
   const [postInfo, setPostInfo] = useState(null);
@@ -17,6 +17,7 @@ export default function BoardviewContainer() {
     signinUserId ? JSON.parse(JSON.stringify(rawToken))[2] : null
   )[0];
   const params: any = useRouteMatch().params;
+  const history = useState(useHistory())[0];
 
   useEffect(() => {
     services.getBoardview(setPostInfo, params.id);
@@ -34,6 +35,7 @@ export default function BoardviewContainer() {
       setContent={setContent}
       token={token}
       params={params}
+      history={history}
     />
   );
 }
