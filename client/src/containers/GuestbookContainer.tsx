@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import GuestbookPresenter from "../presenters/GuestbookPresenter";
 import { store } from "../index";
 import * as services from "../services/User";
-import moment from "moment";
 
 export default function GuestbookContainer() {
   const [signinUserId, setSigninUserId] = useState(
@@ -28,10 +27,6 @@ export default function GuestbookContainer() {
     services.getGuestbook(setMessageData, setPageIndex);
   }, []);
 
-  function momenter(time: any) {
-    return moment(new Date(time)).format("YYYY년 MM월 DD일 HH시 mm분");
-  }
-
   return (
     <GuestbookPresenter
       signinUserId={signinUserId}
@@ -40,7 +35,6 @@ export default function GuestbookContainer() {
       token={token}
       messageData={messageData}
       setMessageData={setMessageData}
-      momenter={momenter}
       curPage={curPage}
       setCurPage={setCurPage}
       pageIndex={pageIndex}

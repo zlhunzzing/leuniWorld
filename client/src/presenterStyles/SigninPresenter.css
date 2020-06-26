@@ -1,0 +1,7 @@
+.toSignLink {
+  text-decoration: none;
+}
+
+.toSignLink:hover {
+  text-decoration: underline;
+}

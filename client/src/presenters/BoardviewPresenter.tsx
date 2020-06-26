@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import HeaderContainer from "../containers/HeaderContainer";
 import { ERROR_MESSAGE } from "../common/ErrorMessages";
 import * as services from "../services/User";
+import { store } from "../index";
 
 interface Props {
   postInfo: any;
@@ -48,38 +49,77 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
             textAlign: "left",
           }}
         >
-          <span>제목: {postInfo.title}</span>{" "}
-          <span>작성일: {postInfo.createdAt}</span>
-          <div>글쓴이: {postInfo.username}</div>
-          <div>내용: {postInfo.content}</div>
+          <div
+            style={{
+              borderBottom: "1px solid gray",
+            }}
+          >
+            <span
+              style={{
+                float: "right",
+                paddingRight: "5px",
+                borderLeft: "1px solid black",
+                paddingLeft: "5px",
+              }}
+            >
+              {store
+                .getState()
+                .Handle.momenter(postInfo.createdAt, "YYYY.MM.DD HH:mm")}
+            </span>
+            <span
+              style={{
+                paddingLeft: "5px",
+                paddingRight: "5px",
+                borderRight: "1px solid black",
+              }}
+            >
+              글쓴이: {postInfo.username}
+            </span>
+            <span
+              style={{
+                paddingLeft: "5px",
+              }}
+            >
+              제목: {postInfo.title}
+            </span>{" "}
+          </div>
+          <div
+            style={{
+              paddingLeft: "5px",
+            }}
+          >
+            내용: {postInfo.content}
+          </div>
         </div>
       ) : null}
-      <button
-        onClick={() => {
-          if (window.confirm("글을 수정하시겠습니까?")) {
-            if (signinUserId === Number(postInfo.userId)) {
-              setIsPut(true);
-            } else {
-              alert(ERROR_MESSAGE.WRONG_USER);
+      <form className="FreeboardForm">
+        <button
+          onClick={() => {
+            if (window.confirm("글을 수정하시겠습니까?")) {
+              if (signinUserId === Number(postInfo.userId)) {
+                setIsPut(true);
+              } else {
+                alert(ERROR_MESSAGE.WRONG_USER);
+              }
             }
-          }
-        }}
-      >
-        글수정
-      </button>
-      <button
-        onClick={() => {
-          if (window.confirm("글을 삭제하시겠습니까?")) {
-            if (signinUserId === Number(postInfo.userId)) {
-              services.deleteBoardview(params.id, history);
-            } else {
-              alert(ERROR_MESSAGE.WRONG_USER);
+          }}
+        >
+          글수정
+        </button>
+        <button
+          onClick={() => {
+            if (window.confirm("글을 삭제하시겠습니까?")) {
+              if (signinUserId === Number(postInfo.userId)) {
+                services.deleteBoardview(params.id, history);
+              } else {
+                alert(ERROR_MESSAGE.WRONG_USER);
+              }
             }
-          }
-        }}
-      >
-        글삭제
-      </button>
+          }}
+        >
+          글삭제
+        </button>
+      </form>
     </div>
   ) : (
     <div className="Main">

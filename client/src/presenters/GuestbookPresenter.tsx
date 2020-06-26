@@ -3,6 +3,7 @@ import HeaderContainer from "../containers/HeaderContainer";
 import "../presenterStyles/GuestbookPresenter.css";
 import * as services from "../services/User";
 import { ERROR_MESSAGE } from "../common/ErrorMessages";
+import { store } from "../index";
 
 interface Props {
   signinUserId: any;
@@ -11,7 +12,6 @@ interface Props {
   token: any;
   messageData: any;
   setMessageData: any;
-  momenter: any;
   curPage: number;
   setCurPage: any;
   pageIndex: any;
@@ -27,7 +27,6 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
   token,
   messageData,
   setMessageData,
-  momenter,
   curPage,
   setCurPage,
   pageIndex,
@@ -49,10 +48,36 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             })
             .map((data: any, id: number) => (
               <div key={id} className="GuestbookBlock">
-                <div className="GuestbookHeader">
-                  {data.username} {momenter(data.createdAt)}{" "}
+                <div
+                  className="GuestbookHeader"
+                  style={{
+                    borderBottom: "1px solid gray",
+                    textAlign: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                      paddingLeft: "100px",
+                      fontSize: "15px",
+                    }}
+                  >
+                    {" "}
+                    이름 : {data.username}{" "}
+                  </span>
+                  <span
+                    style={{
+                      float: "right",
+                      paddingRight: "10px",
+                    }}
+                  >
+                    {store
+                      .getState()
+                      .Handle.momenter(data.createdAt, "YYYY.MM.DD HH:mm")}{" "}
+                  </span>
                   {Number(data.userId) === signinUserId ? (
                     <span
+                      className="GuestbookDeleteButton"
                       onClick={() => {
                         services.deleteGuestbook(
                           data.id,
@@ -85,9 +110,12 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             onClick={() => {
               setCurPageIndex(curPageIndex - 1);
             }}
-            style={{
-              fontWeight: "bold",
-            }}
+            className="pagingButton"
+            style={
+              {
+                // fontWeight: "bold",
+              }
+            }
           >
             [prev]
           </span>
@@ -111,9 +139,12 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
             onClick={() => {
               setCurPageIndex(curPageIndex + 1);
             }}
-            style={{
-              fontWeight: "bold",
-            }}
+            className="pagingButton"
+            style={
+              {
+                // fontWeight: "bold",
+              }
+            }
           >
             [next]
           </span>

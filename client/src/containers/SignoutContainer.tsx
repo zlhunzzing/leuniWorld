@@ -5,6 +5,7 @@ import * as authActions from "../modules/Auth";
 export default function SignoutContainer() {
   return (
     <div
+      className="SignoutButton"
       onClick={() => {
         if (window.confirm("로그아웃을 하시겠습니까?")) {
           store.dispatch(authActions.signout());

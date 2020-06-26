@@ -13,7 +13,12 @@ import Boardwrite from "./pages/Boardwrite";
 
 export default function App() {
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        backgroundColor: "rgb(242,243,245)",
+      }}
+    >
       <Switch>
         <Route path="/main" render={() => <Main></Main>}></Route>
         <Route path="/signup" render={() => <Signup></Signup>}></Route>

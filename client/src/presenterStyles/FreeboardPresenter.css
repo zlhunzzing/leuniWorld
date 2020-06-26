@@ -1,0 +1,21 @@
+.FreeboardList:hover {
+  background-color: rgb(242, 243, 245);
+}
+
+.FreeboardTitle {
+  outline: black;
+  color: black;
+  padding-left: 10px;
+  text-decoration: none;
+}
+
+.FreeboardTitle:hover {
+  text-decoration: underline;
+}
+
+.FreeboardForm {
+  /* border: 1px solid black; */
+  width: 600px;
+  margin: 0 auto;
+  text-align: right;
+}

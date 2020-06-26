@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import * as services from "../services/User";
+import HeaderContainer from "../containers/HeaderContainer";
 
 interface Props {
   email: string;
@@ -22,12 +22,11 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
   history,
 }: Props) => {
   return (
-    <div
-      style={{
-        alignItems: "center",
-      }}
-    >
-      <h1>회원가입</h1>
+    <div className="Main">
+      <HeaderContainer />
+
+      <div className="HeaderFavoriteMenus">회원가입</div>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -37,10 +36,9 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
         <div>
           <input
             style={{
-              width: "400px",
+              width: "300px",
               height: "30px",
               margin: "5px",
-              borderRadius: "5px",
             }}
             type="email"
             placeholder="이메일을 입력 해주세요"
@@ -50,10 +48,9 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
         <div>
           <input
             style={{
-              width: "400px",
+              width: "300px",
               height: "30px",
               margin: "5px",
-              borderRadius: "5px",
             }}
             onChange={({ target: { value } }) => setPassword(value)}
             type="password"
@@ -63,30 +60,15 @@ const SignupPresenter: React.FunctionComponent<Props> = ({
         <div>
           <input
             style={{
-              width: "195px",
+              width: "300px",
               height: "30px",
               margin: "5px",
-              borderRadius: "5px",
             }}
             onChange={({ target: { value } }) => setUsername(value)}
             placeholder="이름"
           ></input>
         </div>
-        <div>
-          <Link to="/main">처음으로 돌아가기</Link>
-        </div>
-        <button
-          style={{
-            width: "200px",
-            height: "30px",
-            margin: "5px",
-            borderRadius: "5px",
-            backgroundColor: "skyblue",
-          }}
-          type="submit"
-        >
-          회원가입
-        </button>
+        <button type="submit">회원가입</button>
       </form>
     </div>
   );

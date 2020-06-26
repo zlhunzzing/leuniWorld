@@ -67,7 +67,7 @@ export function addGuestbook(
       },
       {
         headers: {
-          Authorization: document.cookie.match("(^|;) ?user=([^;]*)(;|$)"),
+          Authorization: token,
         },
       }
     )

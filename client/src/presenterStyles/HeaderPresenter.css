@@ -1,5 +1,18 @@
 .SignupBar {
   text-align: right;
+  margin-right: 150px;
+}
+
+.SigninButton {
+  text-decoration: none;
+}
+
+.SigninButton:hover {
+  text-decoration: underline;
+}
+
+.SignoutButton:hover {
+  text-decoration: underline;
 }
 
 .Title {

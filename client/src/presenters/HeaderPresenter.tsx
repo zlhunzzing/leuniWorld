@@ -13,7 +13,13 @@ const HeaderPresenter: React.FunctionComponent<Props> = ({
   return (
     <header>
       <div className="SignupBar">
-        {signinUserId ? <SignoutContainer /> : <Link to="/signin">로그인</Link>}
+        {signinUserId ? (
+          <SignoutContainer />
+        ) : (
+          <Link to="/signin" className="SigninButton">
+            로그인
+          </Link>
+        )}
       </div>
       <Link className="Title" to="/main">
         르니월드

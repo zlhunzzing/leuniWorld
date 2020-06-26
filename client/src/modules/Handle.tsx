@@ -1,4 +1,5 @@
 import { createAction } from "redux-actions";
+import moment from "moment";
 
 export const STOP_MOUNT = "app/Handle/STOP_MOUNT";
 export const SET_CUR_POST_ID = "app/Handle/SET_CUR_POST_ID";
@@ -38,6 +39,10 @@ const initialState = {
       rangeData.push(oneRangeData);
     }
     return rangeData;
+  },
+  momenter: (time: any, format: string) => {
+    // foramt example : "YYYY.MM.DD HH:mm"
+    return moment(new Date(time)).format(format);
   },
 };
 
