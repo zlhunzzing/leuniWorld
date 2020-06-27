@@ -42,63 +42,59 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
 
       <div className="GuestbookChatbox">
         {messageData[curPage - 1] ? (
-          messageData[curPage - 1]
-            .sort((a: any, b: any) => {
-              return b.id - a.id;
-            })
-            .map((data: any, id: number) => (
-              <div key={id} className="GuestbookBlock">
-                <div
-                  className="GuestbookHeader"
+          messageData[curPage - 1].map((data: any, id: number) => (
+            <div key={id} className="GuestbookBlock">
+              <div
+                className="GuestbookHeader"
+                style={{
+                  borderBottom: "1px solid gray",
+                  textAlign: "center",
+                }}
+              >
+                <span
                   style={{
-                    borderBottom: "1px solid gray",
-                    textAlign: "center",
+                    fontWeight: "bold",
+                    paddingLeft: "100px",
+                    fontSize: "15px",
                   }}
                 >
+                  {" "}
+                  이름 : {data.username}{" "}
+                </span>
+                <span
+                  style={{
+                    float: "right",
+                    paddingRight: "10px",
+                  }}
+                >
+                  {store
+                    .getState()
+                    .Handle.momenter(data.createdAt, "YYYY.MM.DD HH:mm")}{" "}
+                </span>
+                {Number(data.userId) === signinUserId ? (
                   <span
-                    style={{
-                      fontWeight: "bold",
-                      paddingLeft: "100px",
-                      fontSize: "15px",
+                    className="GuestbookDeleteButton"
+                    onClick={() => {
+                      services.deleteGuestbook(
+                        data.id,
+                        setMessageData,
+                        setPageIndex
+                      );
                     }}
                   >
-                    {" "}
-                    이름 : {data.username}{" "}
+                    [삭제]
                   </span>
-                  <span
-                    style={{
-                      float: "right",
-                      paddingRight: "10px",
-                    }}
-                  >
-                    {store
-                      .getState()
-                      .Handle.momenter(data.createdAt, "YYYY.MM.DD HH:mm")}{" "}
-                  </span>
-                  {Number(data.userId) === signinUserId ? (
-                    <span
-                      className="GuestbookDeleteButton"
-                      onClick={() => {
-                        services.deleteGuestbook(
-                          data.id,
-                          setMessageData,
-                          setPageIndex
-                        );
-                      }}
-                    >
-                      [삭제]
-                    </span>
-                  ) : null}
-                </div>
-
-                {data.content.split("<br>").map((line: string, id: number) => (
-                  <div key={id} className="GuestbookContent">
-                    {line}
-                    <br />
-                  </div>
-                ))}
+                ) : null}
               </div>
-            ))
+
+              {data.content.split("<br>").map((line: string, id: number) => (
+                <div key={id} className="GuestbookContent">
+                  {line}
+                  <br />
+                </div>
+              ))}
+            </div>
+          ))
         ) : (
           <div>{ERROR_MESSAGE.WRONG_INTERNET}</div>
         )}
@@ -111,11 +107,6 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
               setCurPageIndex(curPageIndex - 1);
             }}
             className="pagingButton"
-            style={
-              {
-                // fontWeight: "bold",
-              }
-            }
           >
             [prev]
           </span>
@@ -140,11 +131,6 @@ const GuestbookPresenter: React.FunctionComponent<Props> = ({
               setCurPageIndex(curPageIndex + 1);
             }}
             className="pagingButton"
-            style={
-              {
-                // fontWeight: "bold",
-              }
-            }
           >
             [next]
           </span>

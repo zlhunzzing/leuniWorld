@@ -8,13 +8,12 @@ export const stopMount = createAction(STOP_MOUNT);
 
 const initialState = {
   isChatmount: true,
-  listSize: 3,
-  messagePaging: (messageData: any) => {
+  messagePaging: (messageData: any, listSize: number) => {
     let pagingData = [];
     let onePageData = [];
     for (let i = messageData.length - 1; i >= 0; i--) {
       onePageData.push(messageData[i]);
-      if (onePageData.length === initialState.listSize) {
+      if (onePageData.length === listSize) {
         pagingData.push(onePageData);
         onePageData = [];
       }

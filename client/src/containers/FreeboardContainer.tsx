@@ -10,13 +10,16 @@ export default function FreeboardContainer() {
     store.getState().Auth.signinUserId
   );
   const history = useState(useHistory())[0];
+  const [curPage, setCurPage] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [curPageIndex, setCurPageIndex] = useState(1);
 
   store.subscribe(() => {
     setSigninUserId(store.getState().Auth.signinUserId);
   });
 
   useEffect(() => {
-    services.getFreeboard(setList);
+    services.getFreeboard(setList, setPageIndex);
   }, []);
 
   return (
@@ -24,6 +27,11 @@ export default function FreeboardContainer() {
       list={list}
       signinUserId={signinUserId}
       history={history}
+      curPage={curPage}
+      setCurPage={setCurPage}
+      pageIndex={pageIndex}
+      curPageIndex={curPageIndex}
+      setCurPageIndex={setCurPageIndex}
     />
   );
 }

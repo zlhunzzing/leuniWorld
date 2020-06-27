@@ -41,11 +41,11 @@ export function getGuestbook(setMessageData: any, setPageIndex: any) {
     .then((res) => {
       console.log(res.data.guestbooks);
       setMessageData(
-        store.getState().Handle.messagePaging(res.data.guestbooks)[0]
+        store.getState().Handle.messagePaging(res.data.guestbooks, 3)[0]
       );
       const pageCnt = store
         .getState()
-        .Handle.messagePaging(res.data.guestbooks)[1];
+        .Handle.messagePaging(res.data.guestbooks, 3)[1];
       setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => {
@@ -73,11 +73,11 @@ export function addGuestbook(
     )
     .then((res) => {
       setMessageData(
-        store.getState().Handle.messagePaging(res.data.guestbooks)[0]
+        store.getState().Handle.messagePaging(res.data.guestbooks, 3)[0]
       );
       const pageCnt = store
         .getState()
-        .Handle.messagePaging(res.data.guestbooks)[1];
+        .Handle.messagePaging(res.data.guestbooks, 3)[1];
       setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => console.log(err.response));
@@ -95,26 +95,28 @@ export function deleteGuestbook(
       })
       .then((res) => {
         setMessageData(
-          store.getState().Handle.messagePaging(res.data.guestbooks)[0]
+          store.getState().Handle.messagePaging(res.data.guestbooks, 3)[0]
         );
         const pageCnt = store
           .getState()
-          .Handle.messagePaging(res.data.guestbooks)[1];
+          .Handle.messagePaging(res.data.guestbooks, 3)[1];
         setPageIndex(store.getState().Handle.messageRange(pageCnt));
       })
       .catch((err) => console.log(err.response));
   }
 }
 
-export function getFreeboard(setList: any) {
+export function getFreeboard(setList: any, setPageIndex: any) {
   return axios
     .get("http://localhost:3000/user/freeboard")
     .then((res) => {
-      setList(res.data.freeboards);
-      // const pageCnt = store
-      //   .getState()
-      //   .Handle.messagePaging(res.data.freeboards)[1];
-      // setPageIndex(store.getState().Handle.messageRange(pageCnt));
+      setList(
+        store.getState().Handle.messagePaging(res.data.freeboards, 18)[0]
+      );
+      const pageCnt = store
+        .getState()
+        .Handle.messagePaging(res.data.freeboards, 18)[1];
+      setPageIndex(store.getState().Handle.messageRange(pageCnt));
     })
     .catch((err) => {
       console.log(err.response);
