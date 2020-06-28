@@ -7,6 +7,7 @@ import { createConnection } from "typeorm";
 import { getRepository } from "typeorm";
 import { UserEntity } from "../entity/UserEntity";
 import { GuestbookEntity } from "../entity/GuestbookEntity";
+import { FreeboardEntity } from "../entity/FreeboardEntity";
 
 let token;
 
@@ -109,6 +110,81 @@ describe("Implemented testcase", () => {
           .delete("/user/guestbook")
           .send({
             id: 1,
+          })
+          .end((err, res) => {
+            if (err) done(err);
+            expect(res).to.have.status(200);
+            done();
+          });
+      });
+    });
+  });
+
+  describe("freeboard test", () => {
+    describe("POST /user/freeboard", () => {
+      it("it should response 201 status code and guestbooks", (done) => {
+        const agent = chai.request.agent(app);
+        agent
+          .post("/user/freeboard")
+          .set("Authorization", token)
+          .send({
+            title: "first it's mine",
+            content: "real?",
+          })
+          .end((err, res) => {
+            if (err) done(err);
+            expect(res).to.have.status(201);
+            done();
+          });
+      });
+    });
+
+    describe("GET /user/boardview/:postId", () => {
+      it("it should response 200 status code and boardviews", (done) => {
+        const agent = chai.request.agent(app);
+        agent.get(`/user/boardview/${1}`).end((err, res) => {
+          if (err) done(err);
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property("boardview");
+          done();
+        });
+      });
+    });
+
+    describe("PUT /user/boardview/:postId", () => {
+      it("it should response 200 status code and boardviews", (done) => {
+        const agent = chai.request.agent(app);
+        agent
+          .put(`/user/boardview/${1}`)
+          .set("Authorization", token)
+          .send({
+            title: "first it's mine",
+            content: "real!",
+          })
+          .end((err, res) => {
+            if (err) done(err);
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property("boardview");
+            expect(res.body.boardview.content).to.equal("real!");
+            done();
+          });
+      });
+    });
+
+    describe("DELETE /user/boardview/:postId", () => {
+      afterEach(async () => {
+        await getRepository(FreeboardEntity).query(
+          `TRUNCATE TABLE freeboard_entity;`
+        );
+      });
+
+      it("it should response 200 status code", (done) => {
+        const postId = 1;
+        const agent = chai.request.agent(app);
+        agent
+          .delete(`/user/boardview/${postId}`)
+          .send({
+            id: postId,
           })
           .end((err, res) => {
             if (err) done(err);
