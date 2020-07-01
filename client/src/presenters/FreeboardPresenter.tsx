@@ -100,7 +100,8 @@ const FreeboardPresenter: React.FunctionComponent<Props> = ({
       </ul>
       <form className="FreeboardForm">
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (signinUserId) {
               history.push("/boardwrite");
             } else {

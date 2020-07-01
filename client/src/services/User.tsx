@@ -2,11 +2,13 @@ import axios from "axios";
 import { store } from "../index";
 import * as authActions from "../modules/Auth";
 
+const server = "localhost:3000";
+
 export function signin(email: string, password: string, history: any) {
   return axios
-    .post("http://localhost:3000/user/signin", {
-      email: email,
-      password: password,
+    .post(`http://${server}/user/signin`, {
+      email,
+      password,
     })
     .then(async (res: any) => {
       document.cookie = `user = ${res.data.token}`;
@@ -24,20 +26,21 @@ export function signup(
   history: any
 ) {
   return axios
-    .post("http://localhost:3000/user/signup", {
-      email: email,
-      password: password,
-      username: username,
+    .post(`http://${server}/user/signup`, {
+      email,
+      password,
+      username,
     })
     .then((res) => {
       history.push("/signin");
+      console.log(res);
     })
     .catch((err) => console.log(err.response));
 }
 
 export function getGuestbook(setMessageData: any, setPageIndex: any) {
   return axios
-    .get("http://localhost:3000/user/guestbook")
+    .get(`http://${server}/user/guestbook`)
     .then((res) => {
       console.log(res.data.guestbooks);
       setMessageData(
@@ -61,7 +64,7 @@ export function addGuestbook(
 ) {
   return axios
     .post(
-      "http://localhost:3000/user/guestbook",
+      `http://${server}/user/guestbook`,
       {
         content: content.replace(/\n/g, "<br>"),
       },
@@ -90,8 +93,8 @@ export function deleteGuestbook(
 ) {
   if (window.confirm("댓글을 삭제하겠습니까?")) {
     return axios
-      .delete("http://localhost:3000/user/guestbook", {
-        data: { id: id },
+      .delete(`http://${server}/user/guestbook`, {
+        data: { id },
       })
       .then((res) => {
         setMessageData(
@@ -108,7 +111,7 @@ export function deleteGuestbook(
 
 export function getFreeboard(setList: any, setPageIndex: any) {
   return axios
-    .get("http://localhost:3000/user/freeboard")
+    .get(`http://${server}/user/freeboard`)
     .then((res) => {
       setList(
         store.getState().Handle.messagePaging(res.data.freeboards, 18)[0]
@@ -125,7 +128,7 @@ export function getFreeboard(setList: any, setPageIndex: any) {
 
 export function getBoardview(setPostInfo: any, paramsId: number) {
   return axios
-    .get(`http://localhost:3000/user/boardview/${paramsId}`)
+    .get(`http://${server}/user/boardview/${paramsId}`)
     .then((res) => {
       setPostInfo(res.data.boardview);
     })
@@ -143,7 +146,7 @@ export function addFreeboard(
   console.log(typeof title, typeof content, token);
   return axios
     .post(
-      "http://localhost:3000/user/freeboard",
+      `http://${server}/user/freeboard`,
       {
         title,
         content: content.replace(/\n/g, "<br>"),
@@ -165,7 +168,7 @@ export function putBoardview(
 ) {
   return axios
     .put(
-      `http://localhost:3000/user/boardview/${paramsId}`,
+      `http://${server}/user/boardview/${paramsId}`,
       {
         title,
         content: content.replace(/\n/g, "<br>"),
@@ -183,8 +186,8 @@ export function putBoardview(
 export function deleteBoardview(id: number, history: any) {
   if (window.confirm("댓글을 삭제하겠습니까?")) {
     return axios
-      .delete(`http://localhost:3000/user/boardview/${id}`, {
-        data: { id: id },
+      .delete(`http://${server}/user/boardview/${id}`, {
+        data: { id },
       })
       .then((res) => {
         history.push("/freeboard");

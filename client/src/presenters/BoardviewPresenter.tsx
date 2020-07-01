@@ -94,7 +94,8 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
       ) : null}
       <form className="FreeboardForm">
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (window.confirm("글을 수정하시겠습니까?")) {
               if (signinUserId === Number(postInfo.userId)) {
                 setIsPut(true);
@@ -107,7 +108,8 @@ const BoardviewPresenter: React.FunctionComponent<Props> = ({
           글수정
         </button>
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (window.confirm("글을 삭제하시겠습니까?")) {
               if (signinUserId === Number(postInfo.userId)) {
                 services.deleteBoardview(params.id, history);
