@@ -4,21 +4,21 @@
 
 ## 구현된 기능
 
-- 회원가입 & 로그인 & 로그아웃
+- 로그인 & 로그아웃
 
-()
+![sign](https://j.gifs.com/5QkZ3X.gif)
 
 - 실시간 채팅
 
-![chat](./readme/image/caffeeChat.png)
+![chat](https://j.gifs.com/D1DjG6.gif)
 
 - 방명록
 
-![guestbook](./readme/image/guestbook.png)
+![guestbook](https://j.gifs.com/1WOZgZ.gif)
 
 - 자유게시판
 
-()
+![freeboard](https://j.gifs.com/WLrJ5E.gif)
 
 ## 설치 방법 (Installation)
 
@@ -26,6 +26,7 @@
 - client 사용언어 - Typescript, React
 - [/server] DB - Mysql 설치가 필요헙니다.
 - [/server] .env.example을 보고 .env파일을 새로 작성해야합니다.
+- [/client] /src/services/User.tsx와 /src/container/ChatboxContainer.tsx에서 서버 IP를 수정해야합니다.
 
 ## 사용법 (Usage)
 
